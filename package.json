@@ -1,0 +1,62 @@
+{
+  "name": "@tomjs/vite-plugin-html",
+  "version": "1.0.0",
+  "description": "html plugin for vite",
+  "keywords": [
+    "tomjs",
+    "vite",
+    "plugin",
+    "vite-plugin",
+    "html"
+  ],
+  "author": {
+    "name": "tom",
+    "email": "tom@tomgao.cc"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomgao365/vite-plugin-html.git"
+  },
+  "files": [
+    "dist",
+    "*.md"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --dts --format cjs,esm",
+    "lint": "run-s lint:eslint lint:stylelint lint:prettier",
+    "lint:eslint": "eslint \"{src,examples}/**/*.{ts,tsx,vue}\" *.{js,cjs,ts} --fix --cache",
+    "lint:stylelint": "stylelint \"examples/**/*.{vue,css,less,html}\" --fix --cache",
+    "lint:prettier": "prettier --write \"{src,examples}/**/*.{js,cjs,ts,tsx,json,md,html}\" *.{js,cjs,ts,json,md}",
+    "bootstrap": "pnpm build && run-p bootstrap:*",
+    "bootstrap:vue": "cd examples/vue && pnpm i",
+    "bootstrap:react": "cd examples/react && pnpm i",
+    "prepare": "husky install"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^18.2.0",
+    "@tomjs/commitlint": "^1.0.4",
+    "@tomjs/eslint": "^1.0.4",
+    "@tomjs/prettier": "^1.0.2",
+    "@tomjs/stylelint": "^1.0.2",
+    "@tomjs/tsconfig": "^1.0.4",
+    "@types/html-minifier-terser": "^7.0.1",
+    "@types/node": "^16.18.60",
+    "eslint": "^8.52.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.0.3",
+    "stylelint": "^15.11.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0"
+  }
+}
