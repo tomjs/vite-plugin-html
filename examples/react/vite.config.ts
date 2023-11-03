@@ -5,5 +5,5 @@ import html from '../../dist/index.mjs';
 // https://vitejs.dev/config/
 export default defineConfig({
   // plugins: [react()],
-  plugins: [react(), html()],
+  plugins: [react(), html({ minify: true })],
 });

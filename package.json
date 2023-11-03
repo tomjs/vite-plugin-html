@@ -39,7 +39,10 @@
   "engines": {
     "node": ">=16"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@rollup/pluginutils": "^5.0.5",
+    "html-minifier-terser": "^7.2.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^18.2.0",
     "@tomjs/commitlint": "^1.0.4",

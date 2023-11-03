@@ -5,5 +5,5 @@ import html from '../../dist/index.mjs';
 // https://vitejs.dev/config/
 export default defineConfig({
   // plugins: [vue()],
-  plugins: [vue(), html()],
+  plugins: [vue(), html({ minify: true })],
 });
