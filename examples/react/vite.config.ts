@@ -5,5 +5,14 @@ import html from '../../dist/index.mjs';
 // https://vitejs.dev/config/
 export default defineConfig({
   // plugins: [react()],
-  plugins: [react(), html({ minify: true })],
+  plugins: [
+    react(),
+    html({
+      minify: false,
+      loading: {
+        selector: '#root',
+        after: `<div style="color:#888">加载中...</div>`,
+      },
+    }),
+  ],
 });

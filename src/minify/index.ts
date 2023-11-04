@@ -1,14 +1,13 @@
-import type { Options as MinifyOptions } from 'html-minifier-terser';
 import type { PluginOption } from 'vite';
 import { minify as minifyFn } from 'html-minifier-terser';
 import { createFilter } from '@rollup/pluginutils';
-import { HtmlMinifyPluginOptions } from './types';
+import { HtmlMinifyOptions, HtmlMinifyPluginOptions } from './types';
 
 export * from './types';
 
 const htmlFilter = createFilter(['**/*.html']);
 
-function getOptions(minify: boolean): MinifyOptions {
+function getOptions(minify: boolean): HtmlMinifyOptions {
   return {
     collapseWhitespace: minify,
     keepClosingSlash: minify,
@@ -32,9 +31,14 @@ async function minifyHtml(html: string, minify: HtmlMinifyPluginOptions) {
     minifyOptions = getOptions(minify);
   }
 
-  return await minifyFn(html, minifyOptions as MinifyOptions);
+  return await minifyFn(html, minifyOptions as HtmlMinifyOptions);
 }
 
+/**
+ * html 压缩插件
+ * @param minify 配置参数，默认为 true
+ * @returns
+ */
 export function useHtmlMinifyPlugin(minify: HtmlMinifyPluginOptions): PluginOption {
   return {
     name: '@tomjs:html-minify',
