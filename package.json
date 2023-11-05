@@ -38,7 +38,8 @@
     "bootstrap": "pnpm build && run-p bootstrap:*",
     "bootstrap:vue": "cd examples/vue && pnpm i",
     "bootstrap:react": "cd examples/react && pnpm i",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prepublishOnly": "npm run build && np --any-branch --no-yarn --yolo --no-publish --message \"chore: release v%s\""
   },
   "engines": {
     "node": ">=16"

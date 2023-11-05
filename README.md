@@ -1,5 +1,7 @@
 # @tomjs/vite-plugin-html
 
+![npm](https://img.shields.io/npm/v/%40tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/%40tomjs%2Feslint) ![npm package minimized gzipped size (scoped version select exports)](https://img.shields.io/bundlejs/size/%40tomjs/vite-plugin-html)
+
 vite 插件，用于处理 html 文件，提供压缩、loading、cdn功能
 
 ## 安装
@@ -33,12 +35,12 @@ npm i @tomjs/vite-plugin-html -D
 ```js
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import html from '@tomjs/vite-plugin-html';
+import { useHtmlPlugin } from '@tomjs/vite-plugin-html';
 
 export default defineConfig({
   plugins: [
     vue(),
-    html({
+    useHtmlPlugin({
       minify: true,
       loading: {
         // selector: '#app',
@@ -57,12 +59,12 @@ export default defineConfig({
 ```js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
-import html from '@tomjs/vite-plugin-html';
+import { useHtmlPlugin } from '@tomjs/vite-plugin-html';
 
 export default defineConfig({
   plugins: [
     react(),
-    html({
+    useHtmlPlugin({
       minify: true,
       loading: {
         selector: '#root',
@@ -222,6 +224,34 @@ export default defineConfig({
 });
 ```
 
+#### 依赖
+
+如果使用非 `yarn` 作为包管理工具，部分 npm 包需要额外引入特殊依赖包，为保障正常使用，需要添加依赖
+
+- pinia
+
+```bash
+pnpm add vue-demi pinia
+```
+
+- ant-design-vue
+
+```bash
+pnpm add dayjs ant-design-vue
+```
+
+- @vueuse/core
+
+```bash
+pnpm add @vueuse/core @vueuse/shared
+```
+
+- antd
+
+```bash
+pnpm add dayjs antd
+```
+
 #### 参数
 
 ##### HtmlCdnOptions
@@ -323,3 +353,4 @@ pnpm bootstrap
 
 - [vite-plugin-html](https://github.com/vbenjs/vite-plugin-html)
 - [ant-design-pro](https://github.com/ant-design/ant-design-pro)
+- [vite-plugin-cdn-import](https://www.npmjs.com/package/vite-plugin-cdn-import)

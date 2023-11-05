@@ -23,7 +23,7 @@ function getOptions(minify: boolean): HtmlMinifyOptions {
 async function minifyHtml(html: string, minify: boolean | HtmlMinifyOptions) {
   if (typeof minify === 'boolean') {
     if (minify) {
-      await minifyFn(html, getOptions(minify));
+      return await minifyFn(html, getOptions(minify));
     }
     return html;
   }

@@ -14,7 +14,7 @@ export interface HtmlPluginOptions {
   /**
    * 压缩插件配置，默认为 true
    */
-  minify: boolean | HtmlMinifyOptions;
+  minify?: boolean | HtmlMinifyOptions;
   /**
    * loading 插件配置，默认为 false
    */
@@ -46,5 +46,3 @@ export function useHtmlPlugin(options?: HtmlPluginOptions): PluginOption[] {
 
   return plugins;
 }
-
-export default useHtmlPlugin;
