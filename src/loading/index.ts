@@ -1,6 +1,6 @@
 import type { PluginOption } from 'vite';
 import { parse as htmlParser } from 'node-html-parser';
-import { HtmlLoadingOptions, HtmlLoadingPluginOptions } from './types';
+import { type HtmlLoadingOptions } from './types';
 
 export * from './types';
 
@@ -12,7 +12,7 @@ const DEFAULT_SELECTOR = '#app';
  * @param options 配置参数，默认为 true
  * @returns
  */
-export function useHtmlLoadingPlugin(options?: HtmlLoadingPluginOptions): PluginOption {
+export function useHtmlLoadingPlugin(options?: boolean | HtmlLoadingOptions): PluginOption {
   return {
     name: '@tomjs:html-loading',
     enforce: 'post',

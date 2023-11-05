@@ -19,8 +19,3 @@ export interface HtmlLoadingOptions {
    */
   after?: string;
 }
-
-/**
- * loading 插件配置，默认为true
- */
-export type HtmlLoadingPluginOptions = boolean | HtmlLoadingOptions;

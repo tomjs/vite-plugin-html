@@ -13,6 +13,9 @@ export default defineConfig({
         selector: '#root',
         after: `<div style="color:#888">加载中...</div>`,
       },
+      cdn: {
+        modules: ['react', 'react-dom', 'react-router-dom', 'antd'],
+      },
     }),
   ],
 });

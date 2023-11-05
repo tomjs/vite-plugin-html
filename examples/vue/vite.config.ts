@@ -8,12 +8,12 @@ export default defineConfig({
   plugins: [
     vue(),
     html({
-      minify: {
-        removeScriptTypeAttributes: false,
-      },
+      minify: false,
       loading: {
-        selector: '#app',
         after: `<div style="color:#888">加载中...</div>`,
+      },
+      cdn: {
+        modules: ['vue', 'ant-design-vue', 'pinia', 'vue-router'],
       },
     }),
   ],

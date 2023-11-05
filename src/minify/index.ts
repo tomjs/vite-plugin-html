@@ -1,7 +1,7 @@
 import type { PluginOption } from 'vite';
 import { minify as minifyFn } from 'html-minifier-terser';
 import { createFilter } from '@rollup/pluginutils';
-import { HtmlMinifyOptions, HtmlMinifyPluginOptions } from './types';
+import { type HtmlMinifyOptions } from './types';
 
 export * from './types';
 
@@ -20,18 +20,15 @@ function getOptions(minify: boolean): HtmlMinifyOptions {
   };
 }
 
-async function minifyHtml(html: string, minify: HtmlMinifyPluginOptions) {
-  if (typeof minify === 'boolean' && !minify) {
+async function minifyHtml(html: string, minify: boolean | HtmlMinifyOptions) {
+  if (typeof minify === 'boolean') {
+    if (minify) {
+      await minifyFn(html, getOptions(minify));
+    }
     return html;
   }
 
-  let minifyOptions: HtmlMinifyPluginOptions = minify;
-
-  if (typeof minify === 'boolean' && minify) {
-    minifyOptions = getOptions(minify);
-  }
-
-  return await minifyFn(html, minifyOptions as HtmlMinifyOptions);
+  return await minifyFn(html, minify);
 }
 
 /**
@@ -39,7 +36,7 @@ async function minifyHtml(html: string, minify: HtmlMinifyPluginOptions) {
  * @param minify 配置参数，默认为 true
  * @returns
  */
-export function useHtmlMinifyPlugin(minify: HtmlMinifyPluginOptions): PluginOption {
+export function useHtmlMinifyPlugin(minify?: boolean | HtmlMinifyOptions): PluginOption {
   return {
     name: '@tomjs:html-minify',
     apply: 'build',

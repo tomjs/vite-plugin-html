@@ -1,6 +1,6 @@
 # @tomjs/vite-plugin-html
 
-vite 插件，用于处理 html 文件，提供压缩、loading功能
+vite 插件，用于处理 html 文件，提供压缩、loading、cdn功能
 
 ## 安装
 
@@ -44,6 +44,9 @@ export default defineConfig({
         // selector: '#app',
         after: `<div style="color:#888">加载中...</div>`,
       },
+      cdn: {
+        modules: ['vue', 'vue-router', 'pinia', 'ant-design-vue'],
+      },
     }),
   ],
 });
@@ -65,6 +68,9 @@ export default defineConfig({
         selector: '#root',
         after: `<div style="color:#888">加载中...</div>`,
       },
+      cdn: {
+        modules: ['react', 'react-dom', 'react-router-dom', 'antd'],
+      },
     }),
   ],
 });
@@ -76,6 +82,7 @@ export default defineConfig({
 | ------- | ------------------------------------------------------ | ------ | ---------------- |
 | minify  | `boolean` 或 [HtmlMinifyOptions](#HtmlMinifyOptions)   | true   | 压缩插件配置     |
 | loading | `boolean` 或 [HtmlLoadingOptions](#HtmlLoadingOptions) | false  | loading 插件配置 |
+| cdn     | `false` 或 [HtmlCdnOptions](#HtmlCdnOptions)           | false  | cdn 插件配置     |
 
 ### 使用压缩
 
@@ -176,6 +183,124 @@ export default defineConfig({
 | style    | `string` | undefined | 自定义 style 代码             |
 | before   | `string` | undefined | 添加在 loading 代码之前的代码 |
 | after    | `string` | undefined | 添加在 loading 代码之后的代码 |
+
+### 使用 cdn
+
+`vite build` 将配置模块改为 `cdn` 的方式引用，提高打包速度和减小包体积
+
+#### vue示例
+
+```ts
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import { useHtmlCdnPlugin } from '@tomjs/vite-plugin-html';
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    useHtmlCdnPlugin({
+      modules: ['vue', 'vue-router', 'pinia', 'ant-design-vue'],
+    }),
+  ],
+});
+```
+
+#### react示例
+
+```ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import { useHtmlCdnPlugin } from '@tomjs/vite-plugin-html';
+
+export default defineConfig({
+  plugins: [
+    react(),
+    useHtmlCdnPlugin({
+      modules: ['react', 'react-dom', 'react-router-dom', 'antd'],
+    }),
+  ],
+});
+```
+
+#### 参数
+
+##### HtmlCdnOptions
+
+| 参数名 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| **modules** | ([NpmModule](#NpmModule) \| [SupportedNpmModule](#SupportedNpmModule) \| [HtmlInjectCode](#HtmlInjectCode))[] | [] | 引入的模块 |
+| type | `'unpkg' \| 'jsdelivr' \| 'custom'` | 'unpkg' | cdn 源类型。jsdelivr: url默认值为 https://cdn.jsdelivr.net/npm/{name}@{version}/{file}; unpkg: url默认值为 https://unpkg.com/{name}@{version}/{file}; custom: 可自定义url |
+| url | `string` | '' | 结合 type 参数使用, 设置不同url，最终路径为 {url}/{file} |
+| local | `'boolean' \| 'string[]'` | false | 本地模式或指定模块为本地模块，默认为 false |
+| localDir | `string` | 'dist' | 本地输出目录, 默认同 vite 配置 build 选项.outDir |
+| localPath | `string` | 'npm/{name}@{version}' | 本地输出路径，对应模块url也会替换为该路径 |
+
+##### NpmModule
+
+cdn 模块配置
+
+| 参数名   | 类型                 | 默认值    | 说明                                   |
+| -------- | -------------------- | --------- | -------------------------------------- |
+| **name** | `string`             | undefined | 包的名称                               |
+| var      | `string`             | undefined | 全局变量名，未指定则为包名的大驼峰形式 |
+| version  | `string`             | undefined | 包版本，未指定则取node_modules下的版本 |
+| file     | `string \| string[]` | undefined | 需要加载的资源js/css文件路径           |
+| deps     | `string[]`           | undefined | 依赖模块                               |
+| local    | `boolean`            | false     | 是否为本地模块                         |
+
+示例如下:
+
+```ts
+const modules = [
+  {
+    name: 'lodash',
+    var: '_',
+    file: 'lodash.min.js',
+  },
+  {
+    name: 'vue',
+    var: 'Vue',
+  },
+  {
+    name: 'vue-router',
+    deps: ['vue'],
+  },
+  {
+    name: 'ant-design-vue',
+    deps: ['vue', 'vue-router'],
+    file: ['dist/antd.min.js'],
+  },
+];
+```
+
+##### SupportedNpmModule
+
+默认支持类型，内置对应 `NpmModule` 配置
+
+- dayjs
+- axios
+- lodash
+- vue
+- vue-router
+- vue-demi
+- pinia
+- ant-design-vue
+- @vueuse/core
+- @vueuse/shared
+- react
+- react-dom
+- react-router-dom
+- antd
+- ahooks
+- @ant-design/charts
+
+##### HtmlInjectCode
+
+注入的 html 页面代码等
+
+| 参数名   | 类型     | 默认值    | 说明                 |
+| -------- | -------- | --------- | -------------------- |
+| **code** | `string` | undefined | 注入的 html 页面代码 |
 
 ## 开发
 

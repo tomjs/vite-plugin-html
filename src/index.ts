@@ -1,7 +1,9 @@
 import type { PluginOption } from 'vite';
-import { type HtmlLoadingPluginOptions, useHtmlLoadingPlugin } from './loading';
-import { type HtmlMinifyPluginOptions, useHtmlMinifyPlugin } from './minify';
+import { type HtmlCdnOptions, useHtmlCdnPlugin } from './cdn';
+import { type HtmlLoadingOptions, useHtmlLoadingPlugin } from './loading';
+import { type HtmlMinifyOptions, useHtmlMinifyPlugin } from './minify';
 
+export * from './cdn';
 export * from './loading';
 export * from './minify';
 
@@ -12,11 +14,15 @@ export interface HtmlPluginOptions {
   /**
    * 压缩插件配置，默认为 true
    */
-  minify: HtmlMinifyPluginOptions;
+  minify: boolean | HtmlMinifyOptions;
   /**
    * loading 插件配置，默认为 false
    */
-  loading?: HtmlLoadingPluginOptions;
+  loading?: boolean | HtmlLoadingOptions;
+  /**
+   * cdn 配置，默认为 true
+   */
+  cdn?: false | HtmlCdnOptions;
 }
 
 /**
@@ -32,6 +38,10 @@ export function useHtmlPlugin(options?: HtmlPluginOptions): PluginOption[] {
 
   if (opts.loading !== false) {
     plugins.push(useHtmlLoadingPlugin(opts.loading));
+  }
+
+  if (typeof opts.cdn !== 'boolean') {
+    plugins.push(useHtmlCdnPlugin(Object.assign({}, opts.cdn)));
   }
 
   return plugins;
