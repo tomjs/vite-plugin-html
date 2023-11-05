@@ -35,12 +35,12 @@ npm i @tomjs/vite-plugin-html -D
 ```js
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import { useHtmlPlugin } from '@tomjs/vite-plugin-html';
+import html from '@tomjs/vite-plugin-html';
 
 export default defineConfig({
   plugins: [
     vue(),
-    useHtmlPlugin({
+    html({
       minify: true,
       loading: {
         // selector: '#app',
@@ -59,12 +59,12 @@ export default defineConfig({
 ```js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
-import { useHtmlPlugin } from '@tomjs/vite-plugin-html';
+import html from '@tomjs/vite-plugin-html';
 
 export default defineConfig({
   plugins: [
     react(),
-    useHtmlPlugin({
+    html({
       minify: true,
       loading: {
         selector: '#root',

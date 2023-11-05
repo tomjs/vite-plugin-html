@@ -46,3 +46,5 @@ export function useHtmlPlugin(options?: HtmlPluginOptions): PluginOption[] {
 
   return plugins;
 }
+
+export default useHtmlPlugin;
