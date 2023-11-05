@@ -82,9 +82,9 @@ export default defineConfig({
 
 | 参数名  | 类型                                                   | 默认值 | 说明             |
 | ------- | ------------------------------------------------------ | ------ | ---------------- |
-| minify  | `boolean` 或 [HtmlMinifyOptions](#HtmlMinifyOptions)   | true   | 压缩插件配置     |
-| loading | `boolean` 或 [HtmlLoadingOptions](#HtmlLoadingOptions) | false  | loading 插件配置 |
-| cdn     | `false` 或 [HtmlCdnOptions](#HtmlCdnOptions)           | false  | cdn 插件配置     |
+| minify  | `boolean` \| [HtmlMinifyOptions](#HtmlMinifyOptions)   | true   | 压缩插件配置     |
+| loading | `boolean` \| [HtmlLoadingOptions](#HtmlLoadingOptions) | false  | loading 插件配置 |
+| cdn     | `false` \| [HtmlCdnOptions](#HtmlCdnOptions)           | false  | cdn 插件配置     |
 
 ### 使用压缩
 
