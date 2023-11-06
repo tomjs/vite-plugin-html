@@ -1,6 +1,6 @@
 {
   "name": "@tomjs/vite-plugin-html",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "html plugin for vite",
   "keywords": [
     "tomjs",
