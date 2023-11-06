@@ -31,7 +31,7 @@ export interface NpmModule {
 /**
  * 默认支持类型
  */
-export type SupportedNpmModule = (
+export type PresetNpmModule = (
   | 'dayjs'
   | 'axios'
   | 'lodash'
@@ -42,6 +42,7 @@ export type SupportedNpmModule = (
   | 'ant-design-vue'
   | '@vueuse/core'
   | '@vueuse/shared'
+  | 'element-plus'
   | 'react'
   | 'react-dom'
   | 'react-router-dom'
@@ -65,7 +66,7 @@ export interface HtmlInjectCode {
 /**
  * cdn 模块配置所有类型
  */
-export type HtmlCdnModule = SupportedNpmModule | NpmModule | HtmlInjectCode;
+export type HtmlCdnModule = PresetNpmModule | NpmModule | HtmlInjectCode;
 
 /**
  * cdn 插件配置

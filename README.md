@@ -258,7 +258,7 @@ pnpm add dayjs antd
 
 | 参数名 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| **modules** | ([NpmModule](#NpmModule) \| [SupportedNpmModule](#SupportedNpmModule) \| [HtmlInjectCode](#HtmlInjectCode))[] | [] | 引入的模块 |
+| **modules** | ([NpmModule](#NpmModule) \| [PresetNpmModule](#PresetNpmModule) \| [HtmlInjectCode](#HtmlInjectCode))[] | [] | 引入的模块 |
 | type | `'unpkg' \| 'jsdelivr' \| 'custom'` | 'unpkg' | cdn 源类型。jsdelivr: url默认值为 https://cdn.jsdelivr.net/npm/{name}@{version}/{file}; unpkg: url默认值为 https://unpkg.com/{name}@{version}/{file}; custom: 可自定义url |
 | url | `string` | '' | 结合 type 参数使用, 设置不同url，最终路径为 {url}/{file} |
 | local | `'boolean' \| 'string[]'` | false | 本地模式或指定模块为本地模块，默认为 false |
@@ -303,7 +303,7 @@ const modules = [
 ];
 ```
 
-##### SupportedNpmModule
+##### PresetNpmModule
 
 默认支持类型，内置对应 `NpmModule` 配置
 
