@@ -317,6 +317,7 @@ const modules = [
 - ant-design-vue
 - @vueuse/core
 - @vueuse/shared
+- element-plus
 - react
 - react-dom
 - react-router-dom
