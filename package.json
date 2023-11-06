@@ -7,7 +7,12 @@
     "vite",
     "plugin",
     "vite-plugin",
-    "html"
+    "vue",
+    "react",
+    "html",
+    "minify",
+    "loading",
+    "cdn"
   ],
   "author": {
     "name": "tom",
