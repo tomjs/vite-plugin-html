@@ -315,6 +315,7 @@ const modules = [
 - vue-demi
 - pinia
 - ant-design-vue
+- ant-design-vue3
 - @vueuse/core
 - @vueuse/shared
 - element-plus

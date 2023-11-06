@@ -34,6 +34,12 @@ export const PRESET_MODULES: Record<PresetNpmModule, Omit<NpmModule, 'name'> & {
       deps: ['vue', 'dayjs'],
       file: ['dist/reset.css', 'dist/antd.min.js'],
     },
+    'ant-design-vue3': {
+      name: 'ant-design-vue',
+      var: 'antd',
+      deps: ['vue', 'dayjs'],
+      file: ['dist/antd.min.css', 'dist/antd.min.js'],
+    },
     '@vueuse/core': {
       var: 'VueUse',
       deps: ['vue', '@vueuse/shared'],
