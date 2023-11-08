@@ -1,5 +1,4 @@
 {
   "extends": "@tomjs/tsconfig/node.json",
-  "compilerOptions": {},
-  "include": ["src", "scripts"]
+  "include": ["src"]
 }
