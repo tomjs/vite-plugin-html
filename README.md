@@ -261,9 +261,7 @@ pnpm add dayjs antd
 | **modules** | ([NpmModule](#NpmModule) \| [PresetNpmModule](#PresetNpmModule) \| [HtmlInjectCode](#HtmlInjectCode))[] | [] | 引入的模块 |
 | type | `'unpkg' \| 'jsdelivr' \| 'custom'` | 'unpkg' | cdn 源类型。jsdelivr: url默认值为 https://cdn.jsdelivr.net/npm/{name}@{version}/{file}; unpkg: url默认值为 https://unpkg.com/{name}@{version}/{file}; custom: 可自定义url |
 | url | `string` | '' | 结合 type 参数使用, 设置不同url，最终路径为 {url}/{file} |
-| local | `'boolean' \| 'string[]'` | false | 本地模式或指定模块为本地模块，默认为 false |
-| localDir | `string` | 'dist' | 本地输出目录, 默认同 vite 配置 build 选项.outDir |
-| localPath | `string` | 'npm/{name}@{version}' | 本地输出路径，对应模块url也会替换为该路径 |
+| local | 'boolean' \| 'string[]' \| [HtmlCdnLocal](#HtmlCdnLocal) | false | 本地模式或指定模块为本地模块，默认为 false |
 
 ##### NpmModule
 
@@ -333,6 +331,18 @@ const modules = [
 | 参数名   | 类型     | 默认值    | 说明                 |
 | -------- | -------- | --------- | -------------------- |
 | **code** | `string` | undefined | 注入的 html 页面代码 |
+
+##### HtmlCdnLocal
+
+cdn 本地配置
+
+| 参数名 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| **modules** | `'boolean' \| string[] ` | false | 本地模式或指定模块为本地模块 |
+| base | 'string' | '/' | 同 vite 配置 base 选项 |
+| outDir | 'string' | 'dist' | 本地输出目录, 默认同 vite 配置 build.outDir 选项 |
+| path | 'string' | 'npm/{name}@{version}' | 本地输出路径，对应模块url也会替换为该路径 |
+| copy | 'boolean' | true | 是否复制到本地 |
 
 ## 开发
 

@@ -70,6 +70,32 @@ export interface HtmlInjectCode {
 export type HtmlCdnModule = PresetNpmModule | NpmModule | HtmlInjectCode;
 
 /**
+ * cdn 本地配置
+ */
+export interface HtmlCdnLocal {
+  /**
+   * 本地模式或指定模块为本地模块，默认为 false
+   */
+  modules: boolean | string[];
+  /**
+   * 同 vite 配置 base 选项，默认为 /
+   */
+  base?: string;
+  /**
+   * 本地输出目录, 默认同 vite 配置 build.outDir 选项，默认为 dist
+   */
+  outDir?: string;
+  /**
+   *  本地输出路径，对应模块url也会替换为该路径，默认为 npm/{name}@{version}
+   */
+  path?: string;
+  /**
+   * 是否复制到本地，默认为 true
+   */
+  copy?: boolean;
+}
+
+/**
  * cdn 插件配置
  */
 export interface HtmlCdnOptions {
@@ -77,6 +103,10 @@ export interface HtmlCdnOptions {
    * 模块配置
    */
   modules: HtmlCdnModule[];
+  /**
+   * 标签选择器，cdn 添加在指定的标签后面，默认为 title
+   */
+  selector?: string;
   /**
    * cdn 源类型, 参数 name/version/file 取自 modules 配置, 默认值为 unpkg
    * * jsdelivr: url默认值为 https://cdn.jsdelivr.net/npm/{name}@{version}/{file}
@@ -94,13 +124,5 @@ export interface HtmlCdnOptions {
   /**
    * 本地模式或指定模块为本地模块，默认为 false
    */
-  local?: boolean | string[];
-  /**
-   * 本地输出目录, 默认同 vite 配置 build.outDir = dist
-   */
-  localDir?: string;
-  /**
-   * 本地输出路径，对应模块url也会替换为该路径，默认为 npm/{name}@{version}
-   */
-  localPath?: string;
+  local?: boolean | string[] | HtmlCdnLocal;
 }

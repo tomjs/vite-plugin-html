@@ -4,7 +4,7 @@ import path from 'node:path';
 import _ from 'lodash';
 import { isEmptyArray, pascalCase, urlContact, uuid } from '../utils';
 import { PRESET_MODULES } from './data';
-import { HtmlCdnOptions, HtmlInjectCode, NpmModule } from './types';
+import { HtmlCdnLocal, HtmlCdnOptions, HtmlInjectCode, NpmModule } from './types';
 
 const urlTypeMap: Record<string, string> = {
   jsdelivr: 'https://cdn.jsdelivr.net/npm/{name}@{version}',
@@ -76,9 +76,11 @@ function getProjectPkgDeps() {
   return Object.keys(pkg.dependencies || {});
 }
 
+type PreHandleOptions = Omit<HtmlCdnOptions, 'local'> & { local: HtmlCdnLocal };
+
 // 预处理配置参数
-function preHandleOptions(options?: HtmlCdnOptions) {
-  const opts: HtmlCdnOptions = Object.assign(
+function preHandleOptions(options?: HtmlCdnOptions): PreHandleOptions {
+  const opts: PreHandleOptions = Object.assign(
     { type: 'unpkg', local: false } as HtmlCdnOptions,
     _.cloneDeep(Object.assign({}, options)),
   );
@@ -97,7 +99,21 @@ function preHandleOptions(options?: HtmlCdnOptions) {
 
   opts.type = type;
   opts.url = url;
-  opts.localPath = opts.localPath || 'npm/{name}@{version}';
+
+  const { local } = opts;
+  const localOpts: HtmlCdnLocal = {
+    modules: [],
+    copy: true,
+  };
+
+  if (typeof local === 'boolean' || Array.isArray(local)) {
+    Object.assign(localOpts, { modules: local });
+  } else {
+    Object.assign(localOpts, local);
+  }
+  localOpts.modules = localOpts.modules ?? false;
+  localOpts.path = localOpts.path || 'npm/{name}@{version}';
+  opts.local = localOpts;
 
   return opts;
 }
@@ -169,10 +185,11 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
 
     // 本地cdn
     if (typeof npm.local !== 'boolean') {
-      if (typeof opts.local === 'boolean') {
-        npm.local = opts.local;
-      } else if (Array.isArray(opts.local) && opts.local.length > 0) {
-        npm.local = opts.local.includes(npm.name);
+      const localModules = opts.local.modules;
+      if (typeof localModules === 'boolean') {
+        npm.local = localModules;
+      } else if (Array.isArray(localModules) && localModules.length > 0) {
+        npm.local = localModules.includes(npm.name);
       } else {
         npm.local = false;
       }
@@ -275,7 +292,7 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
   // 生成引用文件代码
   const pkgDeps = getProjectPkgDeps();
 
-  const baseUrl = userConfig?.base || '/';
+  const baseUrl = opts.local?.base || userConfig?.base || '/';
   moduleList.forEach(npm => {
     if ('code' in npm) {
       codes.push(npm.code || '');
@@ -289,7 +306,7 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
       externalMap[name] = npm.var as string;
     }
 
-    const urlPath = getModulePath(npm.local ? opts.localPath : opts.url, name, npm.version);
+    const urlPath = getModulePath(npm.local ? opts?.local?.path : opts.url, name, npm.version);
     // 引入脚本样式
     const files = getModuleFiles(npm.file);
     files.forEach(s => {

@@ -25,7 +25,7 @@ export function useHtmlCdnPlugin(options: HtmlCdnOptions): PluginOption {
       const { externalLibs, externalMap, options: opts } = moduleConfig;
 
       // 输出目录
-      outDir = opts.localDir || userCfg.build?.outDir || 'dist';
+      outDir = opts.local.outDir || userCfg.build?.outDir || 'dist';
 
       const userConfig: UserConfig = {
         build: {
@@ -45,10 +45,10 @@ export function useHtmlCdnPlugin(options: HtmlCdnOptions): PluginOption {
       return userConfig;
     },
     transformIndexHtml(html) {
-      const { codes } = moduleConfig;
+      const { codes, options } = moduleConfig;
       if (Array.isArray(codes) && codes.length) {
         const root = htmlParser(html);
-        const title = root.querySelector('title');
+        const title = root.querySelector(options.selector || 'title');
         if (!title) {
           const head = root.querySelector('head');
           if (!head) {
@@ -65,6 +65,10 @@ export function useHtmlCdnPlugin(options: HtmlCdnOptions): PluginOption {
     },
     closeBundle() {
       const { moduleList, options: opts } = moduleConfig;
+      if (opts.local.copy === false) {
+        return;
+      }
+
       // 输出本地cdn文件
       const localModules = moduleList.filter(s => s.local);
       if (localModules.length === 0) {
@@ -84,7 +88,7 @@ export function useHtmlCdnPlugin(options: HtmlCdnOptions): PluginOption {
         if (files.length === 0) {
           return;
         }
-        const destFolder = getModulePath(opts.localPath, name, version);
+        const destFolder = getModulePath(opts.local.path, name, version);
 
         files.forEach(s => {
           fs.copySync(path.join(srcFolder, name, s), path.join(outPath, destFolder, s));
