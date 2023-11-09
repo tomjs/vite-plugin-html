@@ -4,12 +4,12 @@ import { type HtmlLoadingOptions } from './types';
 
 export * from './types';
 
-// vue 默认节点选择器
+// Default selector for Vue app
 const DEFAULT_SELECTOR = '#app';
 
 /**
- * html loading 插件
- * @param options 配置参数，默认为 true
+ * HTML loading plugin
+ * @param options Configuration options, default is true
  * @returns
  */
 export function useHtmlLoadingPlugin(options?: boolean | HtmlLoadingOptions): PluginOption {

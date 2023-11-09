@@ -1,21 +1,21 @@
 /**
- * loading 插件详细配置
+ * Detailed configuration for the loading plugin
  */
 export interface HtmlLoadingOptions {
   /**
-   * 插入 loading 的节点选择器，默认 #app
+   * Selector for the node to insert the loading into, default is #app
    */
   selector?: string;
   /**
-   * 自定义 style 代码
+   * Custom style code
    */
   style?: string;
   /**
-   * 添加在 loading 代码之前的代码
+   * Code to add before the loading code
    */
   before?: string;
   /**
-   * 添加在 loading 代码之后的代码
+   * Code to add after the loading code
    */
   after?: string;
 }

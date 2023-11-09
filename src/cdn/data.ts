@@ -1,7 +1,7 @@
 import type { NpmModule, PresetNpmModule } from './types';
 
 /**
- * 预置配置
+ * Preset configurations
  */
 export const PRESET_MODULES: Record<PresetNpmModule, Omit<NpmModule, 'name'> & { name?: string }> =
   {

@@ -10,7 +10,7 @@ export default defineConfig({
     html({
       minify: false,
       loading: {
-        after: `<div style="color:#888">加载中...</div>`,
+        after: `<div style="color:#888">loading...</div>`,
       },
       cdn: {
         modules: ['vue', 'ant-design-vue', 'pinia', 'vue-router'],

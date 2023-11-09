@@ -1,11 +1,11 @@
 import type { Options } from 'html-minifier-terser';
 
 /**
- * html 压缩插件详细配置
+ * Detailed configuration for html minification plugin
  */
 export type HtmlMinifyOptions = Options;
 
 /**
- * html 压缩插件配置
+ * Configuration for html minification plugin
  */
 export type HtmlMinifyPluginOptions = boolean | HtmlMinifyOptions;

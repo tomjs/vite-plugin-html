@@ -11,7 +11,7 @@ export default defineConfig({
       minify: false,
       loading: {
         selector: '#root',
-        after: `<div style="color:#888">加载中...</div>`,
+        after: `<div style="color:#888">loading...</div>`,
       },
       cdn: {
         modules: ['react', 'react-dom', 'react-router-dom', 'antd'],

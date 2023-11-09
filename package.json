@@ -1,7 +1,7 @@
 {
   "name": "@tomjs/vite-plugin-html",
   "version": "1.1.0",
-  "description": "html plugin for vite",
+  "description": "A Vite plugin for handling HTML files, providing compression, loading, and CDN functionality.",
   "keywords": [
     "tomjs",
     "vite",

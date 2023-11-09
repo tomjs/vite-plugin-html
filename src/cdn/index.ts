@@ -9,7 +9,7 @@ import { getModuleConfig, getModuleFiles, getModulePath } from './util';
 export * from './types';
 
 /**
- * vite html 插件，提供cdn等支持
+ * Vite HTML plugin with CDN and other support
  * @returns
  */
 export function useHtmlCdnPlugin(options: HtmlCdnOptions): PluginOption {
@@ -24,7 +24,7 @@ export function useHtmlCdnPlugin(options: HtmlCdnOptions): PluginOption {
       moduleConfig = getModuleConfig(options, userCfg);
       const { externalLibs, externalMap, options: opts } = moduleConfig;
 
-      // 输出目录
+      // Output directory
       outDir = opts.local.outDir || userCfg.build?.outDir || 'dist';
 
       const userConfig: UserConfig = {
@@ -69,7 +69,7 @@ export function useHtmlCdnPlugin(options: HtmlCdnOptions): PluginOption {
         return;
       }
 
-      // 输出本地cdn文件
+      // Output a local CDN file
       const localModules = moduleList.filter(s => s.local);
       if (localModules.length === 0) {
         return;

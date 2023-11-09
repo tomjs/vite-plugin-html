@@ -1,21 +1,21 @@
 import _ from 'lodash';
 
 /**
- * 是否为空数组
+ * Check if the array is empty
  */
 export function isEmptyArray(value: any) {
   return !Array.isArray(value) || value.length === 0;
 }
 
 /**
- * 转换为大驼峰
+ * Convert string to PascalCase
  */
 export function pascalCase(str: string) {
   return _.upperFirst(_.camelCase(str));
 }
 
 /**
- * 32位uuid
+ * Generate a 32-bit UUID
  */
 export function uuid() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -26,9 +26,9 @@ export function uuid() {
 }
 
 /**
- * url 地址拼接
+ * url concat
  */
-export function urlContact(...urls: string[]) {
+export function urlConcat(...urls: string[]) {
   return urls
     .map(s => (s || '').trim())
     .filter(s => s)

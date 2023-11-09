@@ -2,35 +2,37 @@
 
 ![npm](https://img.shields.io/npm/v/%40tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/%40tomjs%2Feslint) ![npm package minimized gzipped size (scoped version select exports)](https://img.shields.io/bundlejs/size/%40tomjs/vite-plugin-html)
 
-vite 插件，用于处理 html 文件，提供压缩、loading、cdn功能
+A Vite plugin for handling HTML files, providing compression, loading, and CDN functionality.
 
-## 安装
+**English** | [中文](./README.zh_CN.md)
 
-使用 `pnpm` 安装
+## Installation
+
+Install using `pnpm`
 
 ```bash
 pnpm add @tomjs/vite-plugin-html -D
 ```
 
-使用 `yarn` 安装
+Install using `yarn`
 
 ```bash
 yarn add @tomjs/vite-plugin-html -D
 ```
 
-使用 `npm` 安装
+Install using `npm`
 
 ```bash
 npm i @tomjs/vite-plugin-html -D
 ```
 
-## 使用说明
+## Usage
 
-以 vue/react 项目为例
+Taking Vue/React projects as examples:
 
-### 默认插件
+### Default Plugin
 
-#### vue示例
+#### Vue Example
 
 ```js
 import { defineConfig } from 'vite';
@@ -44,7 +46,7 @@ export default defineConfig({
       minify: true,
       loading: {
         // selector: '#app',
-        after: `<div style="color:#888">加载中...</div>`,
+        after: `<div style="color:#888">loading...</div>`,
       },
       cdn: {
         modules: ['vue', 'vue-router', 'pinia', 'ant-design-vue'],
@@ -54,7 +56,7 @@ export default defineConfig({
 });
 ```
 
-#### react示例
+#### React Example
 
 ```js
 import { defineConfig } from 'vite';
@@ -68,7 +70,7 @@ export default defineConfig({
       minify: true,
       loading: {
         selector: '#root',
-        after: `<div style="color:#888">加载中...</div>`,
+        after: `<div style="color:#888">loading...</div>`,
       },
       cdn: {
         modules: ['react', 'react-dom', 'react-router-dom', 'antd'],
@@ -78,19 +80,19 @@ export default defineConfig({
 });
 ```
 
-#### 参数
+#### Parameters
 
-| 参数名  | 类型                                                   | 默认值 | 说明             |
-| ------- | ------------------------------------------------------ | ------ | ---------------- |
-| minify  | `boolean` \| [HtmlMinifyOptions](#HtmlMinifyOptions)   | true   | 压缩插件配置     |
-| loading | `boolean` \| [HtmlLoadingOptions](#HtmlLoadingOptions) | false  | loading 插件配置 |
-| cdn     | `false` \| [HtmlCdnOptions](#HtmlCdnOptions)           | false  | cdn 插件配置     |
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| minify | `boolean` \| [HtmlMinifyOptions](#HtmlMinifyOptions) | true | Configuration for compression plugin |
+| loading | `boolean` \| [HtmlLoadingOptions](#HtmlLoadingOptions) | false | Configuration for loading plugin |
+| cdn | `false` \| [HtmlCdnOptions](#HtmlCdnOptions) | false | Configuration for CDN plugin |
 
-### 使用压缩
+### Using Compression
 
-压缩 html 代码
+Compresses HTML code.
 
-#### vue示例
+#### Vue Example
 
 ```ts
 import { defineConfig } from 'vite';
@@ -102,7 +104,7 @@ export default defineConfig({
 });
 ```
 
-#### react示例
+#### React Example
 
 ```ts
 import { defineConfig } from 'vite';
@@ -114,30 +116,30 @@ export default defineConfig({
 });
 ```
 
-#### 参数
+#### Parameters
 
-`boolean` 或 [HtmlMinifyOptions](#HtmlMinifyOptions)，默认为 `true`
+`boolean` or [HtmlMinifyOptions](#HtmlMinifyOptions), default is `true` .
 
 ##### HtmlMinifyOptions
 
-同 [html-minifier-terser](https://www.npmjs.com/package/html-minifier-terser#options-quick-reference) 的`Options`参数，当插件参数为 `boolean` 时，插件默认配置如下，否则为 `html-minifier-terser` 默认
+Same as the `Options` parameter of [html-minifier-terser](https://www.npmjs.com/package/html-minifier-terser#options-quick-reference). When the plugin parameter is `boolean` , the default configuration is as follows. Otherwise, it uses the default configuration of `html-minifier-terser` .
 
-| 参数名 | 类型 | 默认值 | 说明 |
+| Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
-| collapseWhitespace | `boolean` | true | 折叠文档树中构成文本节点的空白区域 |
-| keepClosingSlash | `boolean` | true | 在单例元素上保留尾部斜杠 |
-| removeComments | `boolean` | true | 去除 HTML 注释 |
-| removeRedundantAttributes | `boolean` | true | 当值与默认值匹配时删除属性 |
-| removeScriptTypeAttributes | `boolean` | true | type="text/javascript"从标签中删除script。其他type属性值保持不变 |
-| removeStyleLinkTypeAttributes | `boolean` | true | type="text/css"从style和标签中删除link。其他type属性值保持不变 |
-| useShortDoctype | `boolean` | true | 将 替换doctype为短 (HTML5) 文档类型 |
-| minifyCSS | `boolean` | true | 缩小样式元素和样式属性中的 CSS（使用clean-css） |
+| collapseWhitespace | `boolean` | true | Collapse white space that contributes to text nodes |
+| keepClosingSlash | `boolean` | true | Keep the trailing slash on singleton elements |
+| removeComments | `boolean` | true | Remove HTML comments |
+| removeRedundantAttributes | `boolean` | true | Remove attributes when value matches default |
+| removeScriptTypeAttributes | `boolean` | true | Remove `type="text/javascript"` from script tags |
+| removeStyleLinkTypeAttributes | `boolean` | true | Remove `type="text/css"` from style and link tags |
+| useShortDoctype | `boolean` | true | Replace `doctype` with short (HTML5) doctype |
+| minifyCSS | `boolean` | true | Minify CSS in style elements and style attributes (using clean-css) |
 
-### 使用loading
+### Using Loading
 
-在应用根节点增加loading代码，避免网络问题造成的白屏
+Adds loading code to the root node of the application to prevent white screens caused by network issues.
 
-#### vue示例
+#### Vue Example
 
 ```js
 import { defineConfig } from 'vite';
@@ -149,13 +151,13 @@ export default defineConfig({
     vue(),
     useHtmlLoadingPlugin({
       // selector: '#app',
-      after: `<div style="color:#888">加载中...</div>`,
+      after: `<div style="color:#888">loading...</div>`,
     }),
   ],
 });
 ```
 
-#### react示例
+#### React Example
 
 ```js
 import { defineConfig } from 'vite';
@@ -167,30 +169,30 @@ export default defineConfig({
     react(),
     useHtmlLoadingPlugin({
       selector: '#root',
-      after: `<div style="color:#888">加载中...</div>`,
+      after: `<div style="color:#888">loading...</div>`,
     }),
   ],
 });
 ```
 
-#### 参数
+#### Parameters
 
-`boolean` 或 [HtmlLoadingOptions](#HtmlLoadingOptions)，默认为 `true`
+`boolean` or [HtmlLoadingOptions](#HtmlLoadingOptions), default is `true` .
 
 ##### HtmlLoadingOptions
 
-| 参数名   | 类型     | 默认值    | 说明                          |
-| -------- | -------- | --------- | ----------------------------- |
-| selector | `string` | #app      | 插入 loading 节点的选择器     |
-| style    | `string` | undefined | 自定义 style 代码             |
-| before   | `string` | undefined | 添加在 loading 代码之前的代码 |
-| after    | `string` | undefined | 添加在 loading 代码之后的代码 |
+| Parameter | Type     | Default   | Description                |
+| --------- | -------- | --------- | -------------------------- |
+| selector  | `string` | #app      | Selector for loading node  |
+| style     | `string` | undefined | Custom style code          |
+| before    | `string` | undefined | Code to add before loading |
+| after     | `string` | undefined | Code to add after loading  |
 
-### 使用 cdn
+### Using CDN
 
-`vite build` 将配置模块改为 `cdn` 的方式引用，提高打包速度和减小包体积
+Changes module configuration to use CDN for `vite build` , improving build speed and reducing bundle size.
 
-#### vue示例
+#### Vue Example
 
 ```ts
 import { defineConfig } from 'vite';
@@ -207,7 +209,7 @@ export default defineConfig({
 });
 ```
 
-#### react示例
+#### React Example
 
 ```ts
 import { defineConfig } from 'vite';
@@ -224,9 +226,9 @@ export default defineConfig({
 });
 ```
 
-#### 依赖
+#### Dependencies
 
-如果使用非 `yarn` 作为包管理工具，部分 npm 包需要额外引入特殊依赖包，为保障正常使用，需要添加依赖
+If you are using a package manager other than `yarn` , you may need to install additional dependencies for certain npm packages. To ensure proper functionality, please add the following dependencies:
 
 - pinia
 
@@ -252,31 +254,31 @@ pnpm add @vueuse/core @vueuse/shared
 pnpm add dayjs antd
 ```
 
-#### 参数
+#### Parameters
 
 ##### HtmlCdnOptions
 
-| 参数名 | 类型 | 默认值 | 说明 |
+| Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
-| **modules** | ([NpmModule](#NpmModule) \| [PresetNpmModule](#PresetNpmModule) \| [HtmlInjectCode](#HtmlInjectCode))[] | [] | 引入的模块 |
-| type | `'unpkg' \| 'jsdelivr' \| 'custom'` | 'unpkg' | cdn 源类型。jsdelivr: url默认值为 https://cdn.jsdelivr.net/npm/{name}@{version}/{file}; unpkg: url默认值为 https://unpkg.com/{name}@{version}/{file}; custom: 可自定义url |
-| url | `string` | '' | 结合 type 参数使用, 设置不同url，最终路径为 {url}/{file} |
-| local | 'boolean' \| 'string[]' \| [HtmlCdnLocal](#HtmlCdnLocal) | false | 本地模式或指定模块为本地模块，默认为 false |
+| **modules** | ([NpmModule](#NpmModule) \| [PresetNpmModule](#PresetNpmModule) \| [HtmlInjectCode](#HtmlInjectCode))[] | [] | Modules to import |
+| type | `'unpkg' \| 'jsdelivr' \| 'custom'` | 'unpkg' | CDN source type |
+| url | `string` | '' | Custom URL (used with `type` ) |
+| local | 'boolean' \| 'string[]' \| [HtmlCdnLocal](#HtmlCdnLocal) | false | Local mode or specific modules |
 
 ##### NpmModule
 
-cdn 模块配置
+Configuration for CDN modules.
 
-| 参数名   | 类型                 | 默认值    | 说明                                   |
-| -------- | -------------------- | --------- | -------------------------------------- |
-| **name** | `string`             | undefined | 包的名称                               |
-| var      | `string`             | undefined | 全局变量名，未指定则为包名的大驼峰形式 |
-| version  | `string`             | undefined | 包版本，未指定则取node_modules下的版本 |
-| file     | `string \| string[]` | undefined | 需要加载的资源js/css文件路径           |
-| deps     | `string[]`           | undefined | 依赖模块                               |
-| local    | `boolean`            | false     | 是否为本地模块                         |
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **name** | `string` | undefined | Name of the package |
+| var | `string` | undefined | Global variable name (defaults to PascalCase name) |
+| version | `string` | undefined | Package version (defaults to version in node_modules) |
+| file | `string \| string[]` | undefined | Path to the resource JS/CSS file |
+| deps | `string[]` | undefined | Dependent modules |
+| local | `boolean` | false | Whether it is a local module |
 
-示例如下:
+Example:
 
 ```ts
 const modules = [
@@ -303,7 +305,7 @@ const modules = [
 
 ##### PresetNpmModule
 
-默认支持类型，内置对应 `NpmModule` 配置
+Default supported types, internally mapped to corresponding [NpmModule](#NpmModule) configurations:
 
 - dayjs
 - axios
@@ -326,42 +328,42 @@ const modules = [
 
 ##### HtmlInjectCode
 
-注入的 html 页面代码等
+Injected HTML page code.
 
-| 参数名   | 类型     | 默认值    | 说明                 |
-| -------- | -------- | --------- | -------------------- |
-| **code** | `string` | undefined | 注入的 html 页面代码 |
+| Parameter | Type     | Default   | Description              |
+| --------- | -------- | --------- | ------------------------ |
+| **code**  | `string` | undefined | HTML page code to inject |
 
 ##### HtmlCdnLocal
 
-cdn 本地配置
+Local configuration for CDN.
 
-| 参数名 | 类型 | 默认值 | 说明 |
+| Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
-| **modules** | `'boolean' \| string[] ` | false | 本地模式或指定模块为本地模块 |
-| base | 'string' | '/' | 同 vite 配置 base 选项 |
-| outDir | 'string' | 'dist' | 本地输出目录, 默认同 vite 配置 build.outDir 选项 |
-| path | 'string' | 'npm/{name}@{version}' | 本地输出路径，对应模块url也会替换为该路径 |
-| copy | 'boolean' | true | 是否复制到本地 |
+| **modules** | `'boolean' \| string[]` | false | Local mode or specific modules |
+| base | 'string' | '/' | Same as Vite's `base` option |
+| outDir | 'string' | 'dist' | Local output directory, defaults to Vite's `build.outDir` |
+| path | 'string' | 'npm/{name}@{version}' | Local output path, module URLs will also be replaced with this path |
+| copy | 'boolean' | true | Whether to copy to local directory |
 
-## 开发
+## Development
 
-- 开发环境
+- Development requirements:
 
   - git
   - node>=16
   - pnpm>=8
 
-- 首次使用，需要安装依赖，执行如下命令
+- For first-time use, install dependencies by running the following commands:
 
 ```bash
-# 安装依赖
+# Install dependencies
 pnpm i
-# 生成本库的dist，安装 examples 依赖
+# Generate dist for this library and install dependencies for examples
 pnpm bootstrap
 ```
 
-## 参考项目
+## References
 
 - [vite-plugin-html](https://github.com/vbenjs/vite-plugin-html)
 - [ant-design-pro](https://github.com/ant-design/ant-design-pro)

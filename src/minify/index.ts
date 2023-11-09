@@ -32,9 +32,8 @@ async function minifyHtml(html: string, minify: boolean | HtmlMinifyOptions) {
 }
 
 /**
- * html 压缩插件
- * @param minify 配置参数，默认为 true
- * @returns
+ * HTML compression plugin
+ * @param minify Configuration parameter, default is true
  */
 export function useHtmlMinifyPlugin(minify?: boolean | HtmlMinifyOptions): PluginOption {
   return {

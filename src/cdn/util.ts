@@ -2,7 +2,7 @@ import type { UserConfig } from 'vite';
 import fs from 'node:fs';
 import path from 'node:path';
 import _ from 'lodash';
-import { isEmptyArray, pascalCase, urlContact, uuid } from '../utils';
+import { isEmptyArray, pascalCase, urlConcat, uuid } from '../utils';
 import { PRESET_MODULES } from './data';
 import { HtmlCdnLocal, HtmlCdnOptions, HtmlInjectCode, NpmModule } from './types';
 
@@ -12,7 +12,7 @@ const urlTypeMap: Record<string, string> = {
 };
 
 /**
- * 获取包信息
+ * Get package information
  */
 function getPkgInfo(name: string) {
   const pwd = process.cwd();
@@ -23,16 +23,14 @@ function getPkgInfo(name: string) {
   }
 
   const pkg = JSON.parse(fs.readFileSync(pkgFile, 'utf-8'));
-
   let file = pkg.jsdelivr || pkg.unpkg || pkg.main;
-
   if (!file) {
     throw new Error(
       `The ${name} package was not found with valid file information. Please configure it`,
     );
   }
 
-  // 取压缩文件, 减小体积
+  // Get compressed file to reduce size
   if (!['.min.js', '.prod.js'].find(s => file.endsWith(s))) {
     const minFileArr: string[] = file.split('.');
     if (minFileArr.length > 1) {
@@ -62,7 +60,7 @@ function getPkgInfo(name: string) {
 }
 
 /**
- * 获取当前项目包依赖
+ * Get project package dependencies
  */
 function getProjectPkgDeps() {
   const pwd = process.cwd();
@@ -72,20 +70,19 @@ function getProjectPkgDeps() {
   }
 
   const pkg = JSON.parse(fs.readFileSync(pkgFile, 'utf-8'));
-
   return Object.keys(pkg.dependencies || {});
 }
 
 type PreHandleOptions = Omit<HtmlCdnOptions, 'local'> & { local: HtmlCdnLocal };
 
-// 预处理配置参数
+// Preprocess configuration options
 function preHandleOptions(options?: HtmlCdnOptions): PreHandleOptions {
   const opts: PreHandleOptions = Object.assign(
     { type: 'unpkg', local: false } as HtmlCdnOptions,
     _.cloneDeep(Object.assign({}, options)),
   );
 
-  // url 类型
+  // URL type
   let { type, url } = opts;
   if (!type || !['jsdelivr', 'unpkg', 'custom', 'local'].includes(type)) {
     type = 'unpkg';
@@ -119,7 +116,7 @@ function preHandleOptions(options?: HtmlCdnOptions): PreHandleOptions {
 }
 
 /**
- * 获取模块文件数组
+ * Get module file array
  */
 export function getModuleFiles(file) {
   const files = file || [];
@@ -127,10 +124,10 @@ export function getModuleFiles(file) {
 }
 
 /**
- * 获取模块路径
- * @param url url和local路径
- * @param name 包名
- * @param version 包版本
+ * Get module path
+ * @param url URL and local path
+ * @param name Package name
+ * @param version Package version
  * @returns
  */
 export function getModulePath(url, name: string, version?: string): string {
@@ -143,19 +140,19 @@ export function getModulePath(url, name: string, version?: string): string {
 }
 
 /**
- * 获取处理后的模块配置
- * @param options 插件配置
- * @param userConfig vite用户配置
+ * Get processed module configuration
+ * @param options Plugin configuration
+ * @param userConfig Vite user configuration
  * @returns
  */
 export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig) {
-  // 生成代码
+  // Generate code
   const codes: string[] = [];
   const externalLibs: string[] = [];
   const externalMap: Record<string, string> = {};
-
   const opts = preHandleOptions(options);
   const { modules } = opts;
+
   if (isEmptyArray(modules)) {
     return {
       codes,
@@ -168,7 +165,7 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
 
   const moduleList: (NpmModule | HtmlInjectCode)[] = [];
 
-  // 合并对象模块
+  // Merge object modules
   function mergeModuleConfig(npm: NpmModule) {
     if (moduleList.find(m => m.name === npm.name)) {
       return;
@@ -182,8 +179,7 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
         mergeStringModuleConfig(dep);
       });
     }
-
-    // 本地cdn
+    // Local CDN
     if (typeof npm.local !== 'boolean') {
       const localModules = opts.local.modules;
       if (typeof localModules === 'boolean') {
@@ -194,11 +190,10 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
         npm.local = false;
       }
     }
-
     moduleList.push(npm);
   }
 
-  // 合并字符串模块
+  // Merge string modules
   function mergeStringModuleConfig(npmName: string) {
     if (moduleList.find(m => m.name === npmName)) {
       return;
@@ -215,18 +210,17 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
     }
   }
 
-  // 转换模块配置
+  // Convert module configuration
   modules.forEach(npm => {
     if (typeof npm === 'string') {
       mergeStringModuleConfig(npm);
       return;
     }
-
     if (typeof npm !== 'object') {
       return;
     }
 
-    // 注入代码
+    // Inject code
     if ('code' in npm) {
       if (npm.code) {
         npm.name = uuid();
@@ -234,17 +228,15 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
       }
       return;
     }
-
-    // 自定义模块
+    // Custom module
     mergeModuleConfig(npm as NpmModule);
   });
 
-  // 处理npm版本及引用文件信息
+  // Process npm versions and reference file information
   moduleList.forEach(npm => {
     if ('code' in npm) {
       return;
     }
-
     const { name } = npm;
     const pkg = getPkgInfo(name);
     if (pkg) {
@@ -252,7 +244,7 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
       npm.version = npm.version || version;
       npm.file = npm.file || file;
 
-      // 查看依赖版本信息
+      // Check dependency version information
       const { deps } = npm;
       if (Array.isArray(deps)) {
         deps.forEach(dep => {
@@ -266,10 +258,9 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
       npm.local = false;
     }
 
-    // 处理特殊引用 https://antdv.com/docs/vue/introduce-cn#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%BC%95%E5%85%A5
+    // Handle special references https://antdv.com/docs/vue/introduce#import-in-browser
     if (name === 'ant-design-vue') {
       const dayjs = moduleList.find(m => m.name === 'dayjs');
-
       if (dayjs) {
         const files = getModuleFiles(dayjs.file);
         [
@@ -289,7 +280,7 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
     }
   });
 
-  // 生成引用文件代码
+  // Generate reference file code
   const pkgDeps = getProjectPkgDeps();
 
   const baseUrl = opts.local?.base || userConfig?.base || '/';
@@ -300,17 +291,17 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
     }
     const { name } = npm;
 
-    // 排除 npm 依赖
+    // Exclude npm dependencies
     if (pkgDeps.includes(name)) {
       externalLibs.push(name);
       externalMap[name] = npm.var as string;
     }
 
     const urlPath = getModulePath(npm.local ? opts?.local?.path : opts.url, name, npm.version);
-    // 引入脚本样式
+    // Import scripts and styles
     const files = getModuleFiles(npm.file);
     files.forEach(s => {
-      const fileUrl = urlContact(npm.local ? baseUrl : '', urlPath, (s || '').replace(/\.\//g, ''));
+      const fileUrl = urlConcat(npm.local ? baseUrl : '', urlPath, (s || '').replace(/\.\//g, ''));
       if (s.endsWith('.js')) {
         codes.push(`<script src="${fileUrl}"></script>`);
       } else if (s.endsWith('.css')) {
