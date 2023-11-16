@@ -55,8 +55,7 @@
     "prepublishOnly": "npm run build && np --any-branch --no-yarn --yolo --no-publish --message \"chore: release v%s\""
   },
   "engines": {
-    "node": ">=16",
-    "pnpm": ">=8"
+    "node": ">=16"
   },
   "dependencies": {
     "@rollup/pluginutils": "^5.0.5",
