@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "ant-design-vue": "^4.0.6",
+    "ant-design-vue": "^4.0.7",
     "dayjs": "^1.11.10",
     "pinia": "^2.1.7",
-    "vue": "^3.3.7",
+    "vue": "^3.3.8",
     "vue-demi": "^0.14.6"
   },
   "devDependencies": {
