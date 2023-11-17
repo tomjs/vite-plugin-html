@@ -8,22 +8,22 @@ vite 插件，用于处理 html 文件，提供压缩、loading、cdn功能
 
 ## 安装
 
-使用 `pnpm` 安装
+使用 `pnpm`
 
 ```bash
 pnpm add @tomjs/vite-plugin-html -D
 ```
 
-使用 `yarn` 安装
+使用 `yarn`
 
 ```bash
 yarn add @tomjs/vite-plugin-html -D
 ```
 
-使用 `npm` 安装
+使用 `npm`
 
 ```bash
-npm i @tomjs/vite-plugin-html -D
+npm i @tomjs/vite-plugin-html --save-dev
 ```
 
 ## 使用说明

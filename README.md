@@ -6,24 +6,24 @@ A Vite plugin for handling HTML files, providing compression, loading, and CDN f
 
 **English** | [中文](./README.zh_CN.md)
 
-## Installation
+## Install
 
-Install using `pnpm`
+With `pnpm`
 
 ```bash
 pnpm add @tomjs/vite-plugin-html -D
 ```
 
-Install using `yarn`
+With `yarn`
 
 ```bash
 yarn add @tomjs/vite-plugin-html -D
 ```
 
-Install using `npm`
+With `npm`
 
 ```bash
-npm i @tomjs/vite-plugin-html -D
+npm i @tomjs/vite-plugin-html --save-dev
 ```
 
 ## Usage
