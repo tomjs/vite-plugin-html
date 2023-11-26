@@ -37,8 +37,8 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
       "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
     }
   },
@@ -63,27 +63,27 @@
     "html-minifier-terser": "^7.2.0",
     "lodash": "^4.17.21",
     "node-html-parser": "^6.1.11",
-    "rollup-plugin-external-globals": "^0.9.0"
+    "rollup-plugin-external-globals": "^0.9.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.4.2",
-    "@tomjs/commitlint": "^1.0.4",
-    "@tomjs/eslint": "^1.0.7",
+    "@commitlint/cli": "^18.4.3",
+    "@tomjs/commitlint": "^2.0.3",
+    "@tomjs/eslint": "^1.0.8",
     "@tomjs/prettier": "^1.0.5",
-    "@tomjs/stylelint": "^1.0.5",
-    "@tomjs/tsconfig": "^1.0.6",
+    "@tomjs/stylelint": "^1.0.6",
+    "@tomjs/tsconfig": "^1.0.7",
     "@types/fs-extra": "^11.0.4",
     "@types/html-minifier-terser": "^7.0.2",
-    "@types/node": "^16.18.61",
-    "eslint": "^8.52.0",
+    "@types/node": "^18.18.13",
+    "eslint": "^8.54.0",
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",
     "np": "^8.0.4",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.1.0",
     "stylelint": "^15.11.0",
-    "tsup": "^7.2.0",
-    "typescript": "^5.2.2",
-    "vite": "^4.5.0"
+    "tsup": "^8.0.1",
+    "typescript": "~5.2.2",
+    "vite": "^5.0.2"
   }
 }

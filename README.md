@@ -351,7 +351,7 @@ Local configuration for CDN.
 - Development requirements:
 
   - git
-  - node>=16
+  - node>=18
   - pnpm>=8
 
 - For first-time use, install dependencies by running the following commands:
