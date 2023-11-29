@@ -1,6 +1,6 @@
 # @tomjs/vite-plugin-html
 
-![npm](https://img.shields.io/npm/v/%40tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/%40tomjs%2Feslint) ![npm package minimized gzipped size (scoped version select exports)](https://img.shields.io/bundlejs/size/%40tomjs/vite-plugin-html)
+![npm](https://img.shields.io/npm/v/%40tomjs/vite-plugin-html) ![node-current (scoped)](https://img.shields.io/node/v/%40tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/%40tomjs%2Fvite-plugin-html)
 
 vite 插件，用于处理 html 文件，提供压缩、loading、cdn功能
 

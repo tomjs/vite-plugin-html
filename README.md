@@ -1,6 +1,6 @@
 # @tomjs/vite-plugin-html
 
-![npm](https://img.shields.io/npm/v/%40tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/%40tomjs%2Feslint) ![npm package minimized gzipped size (scoped version select exports)](https://img.shields.io/bundlejs/size/%40tomjs/vite-plugin-html)
+![npm](https://img.shields.io/npm/v/%40tomjs/vite-plugin-html) ![node-current (scoped)](https://img.shields.io/node/v/%40tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/%40tomjs%2Fvite-plugin-html)
 
 A Vite plugin for handling HTML files, providing compression, loading, and CDN functionality.
 
