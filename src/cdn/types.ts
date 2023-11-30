@@ -28,10 +28,12 @@ export interface NpmModule {
   local?: boolean;
 }
 
+export type Union<T> = T | (string & {});
+
 /**
  * Default supported types
  */
-export type PresetNpmModule = (
+export type PresetNpmModule = Union<
   | 'dayjs'
   | 'axios'
   | 'lodash'
@@ -50,8 +52,7 @@ export type PresetNpmModule = (
   | 'antd'
   | 'ahooks'
   | '@ant-design/charts'
-) &
-  string;
+>;
 
 /**
  * Injected code
