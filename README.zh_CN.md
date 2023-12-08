@@ -2,9 +2,9 @@
 
 [![npm](https://img.shields.io/npm/v/@tomjs/vite-plugin-html)](https://www.npmjs.com/package/@tomjs/vite-plugin-html) ![node-current (scoped)](https://img.shields.io/node/v/@tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/@tomjs/vite-plugin-html) [![Docs](https://www.paka.dev/badges/v0/cute.svg)](https://www.paka.dev/npm/@tomjs/vite-plugin-html)
 
-> vite 插件，用于处理 html 文件，提供压缩、loading、cdn功能
-
 [English](./README.md) | **中文**
+
+> vite 插件，用于处理 html 文件，提供压缩、loading、cdn功能
 
 ## 安装
 

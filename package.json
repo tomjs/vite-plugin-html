@@ -5,14 +5,12 @@
   "keywords": [
     "vite",
     "plugin",
-    "vite-plugin",
     "vue",
     "react",
     "html",
     "minify",
     "loading",
-    "cdn",
-    "front-end"
+    "cdn"
   ],
   "author": {
     "name": "tom",

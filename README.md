@@ -2,9 +2,9 @@
 
 [![npm](https://img.shields.io/npm/v/@tomjs/vite-plugin-html)](https://www.npmjs.com/package/@tomjs/vite-plugin-html) ![node-current (scoped)](https://img.shields.io/node/v/@tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/@tomjs/vite-plugin-html) [![Docs](https://www.paka.dev/badges/v0/cute.svg)](https://www.paka.dev/npm/@tomjs/vite-plugin-html)
 
-> A Vite plugin for handling HTML files, providing compression, loading, and CDN functionality.
-
 **English** | [中文](./README.zh_CN.md)
+
+> A Vite plugin for handling HTML files, providing compression, loading, and CDN functionality.
 
 ## Install
 
