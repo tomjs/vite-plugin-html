@@ -82,6 +82,8 @@ export default defineConfig({
 
 #### 参数
 
+你可以访问 [paka.dev](https://paka.dev) 提供的 [API文档](https://paka.dev/npm/@tomjs/vvite-plugin-html)
+
 | 参数名  | 类型                                                   | 默认值 | 说明             |
 | ------- | ------------------------------------------------------ | ------ | ---------------- |
 | minify  | `boolean` \| [HtmlMinifyOptions](#HtmlMinifyOptions)   | true   | 压缩插件配置     |
@@ -359,8 +361,24 @@ cdn 本地配置
 ```bash
 # 安装依赖
 pnpm i
-# 生成本库的dist，安装 examples 依赖
-pnpm bootstrap
+# 编译库
+pnpm build
+```
+
+- 调试 `vue` 项目，执行如下命令
+
+```bash
+cd examples/vue
+pnpm build
+pnpm preview
+```
+
+- 调试 `react` 项目，执行如下命令
+
+```bash
+cd examples/react
+pnpm build
+pnpm preview
 ```
 
 ## 参考项目

@@ -75,23 +75,28 @@ export type HtmlCdnModule = PresetNpmModule | NpmModule | HtmlInjectCode;
  */
 export interface HtmlCdnLocal {
   /**
-   * Local mode or specify modules as local modules, defaults to false
+   * Local mode or specify modules as local modules
+   * @default false
    */
   modules: boolean | string[];
   /**
-   * Same as vite configuration base option, defaults to '/'
+   * Same as vite configuration base option
+   * @default "/"
    */
   base?: string;
   /**
-   * Local output directory, same as vite configuration build.outDir option, defaults to 'dist'
+   * Local output directory, same as vite configuration build.outDir option
+   * @default 'dist'
    */
   outDir?: string;
   /**
-   * Local output path, the module URL will also be replaced with this path, defaults to npm/{name}@{version}
+   * Local output path, the module URL will also be replaced with this path
+   * @default "npm/{name}@{version}"
    */
   path?: string;
   /**
-   * Whether to copy to local, defaults to true
+   * Whether to copy to local
+   * @default true
    */
   copy?: boolean;
 }
@@ -105,14 +110,17 @@ export interface HtmlCdnOptions {
    */
   modules: HtmlCdnModule[];
   /**
-   * Tag selector where the cdn will be added, defaults to 'title'
+   * Tag selector where the cdn will be added
+   * @default "title"
    */
   selector?: string;
   /**
-   * cdn source type, parameters name/version/file are taken from the modules configuration, defaults to 'unpkg'
+   * cdn source type, parameters name/version/file are taken from the modules configuration
    * * jsdelivr: url defaults to https://cdn.jsdelivr.net/npm/{name}@{version}/{file}
    * * unpkg: url defaults to https://unpkg.com/{name}@{version}/{file}
    * * custom: custom url can be defined
+   *
+   * @default "unpkg"
    */
   type?: 'unpkg' | 'jsdelivr' | 'custom';
   /**
@@ -123,7 +131,8 @@ export interface HtmlCdnOptions {
    */
   url?: string;
   /**
-   * Local mode or specify modules as local modules, defaults to false
+   * Local mode or specify modules as local modules
+   * @default false
    */
   local?: boolean | string[] | HtmlCdnLocal;
 }

@@ -3,7 +3,8 @@
  */
 export interface HtmlLoadingOptions {
   /**
-   * Selector for the node to insert the loading into, default is #app
+   * Selector for the node to insert the loading into
+   * @default '#app'
    */
   selector?: string;
   /**

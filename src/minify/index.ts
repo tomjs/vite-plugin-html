@@ -1,3 +1,5 @@
+// original source: https://github.com/vbenjs/vite-plugin-html/blob/ac54a6e6c5334ce24454a3b68542114514f632e6/packages/core/src/minifyHtml.ts
+
 import type { PluginOption } from 'vite';
 import { minify as minifyFn } from 'html-minifier-terser';
 import { createFilter } from '@rollup/pluginutils';

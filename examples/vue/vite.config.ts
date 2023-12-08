@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
+import html from '@tomjs/vite-plugin-html';
 import vue from '@vitejs/plugin-vue';
-import html from '../../dist/index.mjs';
 
 // https://vitejs.dev/config/
 export default defineConfig({

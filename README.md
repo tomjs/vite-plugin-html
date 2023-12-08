@@ -82,6 +82,8 @@ export default defineConfig({
 
 #### Parameters
 
+You Visit The [API Document](https://paka.dev/npm/@tomjs/vite-plugin-html) Power by [paka.dev](https://paka.dev).
+
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
 | minify | `boolean` \| [HtmlMinifyOptions](#HtmlMinifyOptions) | true | Configuration for compression plugin |
@@ -359,8 +361,24 @@ Local configuration for CDN.
 ```bash
 # Install dependencies
 pnpm i
-# Generate dist for this library and install dependencies for examples
-pnpm bootstrap
+# build library
+pnpm build
+```
+
+- To debug the `vue` project, execute the following commands:
+
+```bash
+cd examples/vue
+pnpm build
+pnpm preview
+```
+
+- To debug the `react` project, execute the following commands:
+
+```bash
+cd examples/react
+pnpm build
+pnpm preview
 ```
 
 ## References

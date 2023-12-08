@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
+import html from '@tomjs/vite-plugin-html';
 import react from '@vitejs/plugin-react-swc';
-import html from '../../dist/index.mjs';
 
 // https://vitejs.dev/config/
 export default defineConfig({
