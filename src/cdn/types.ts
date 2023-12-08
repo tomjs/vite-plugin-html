@@ -75,27 +75,27 @@ export type HtmlCdnModule = PresetNpmModule | NpmModule | HtmlInjectCode;
  */
 export interface HtmlCdnLocal {
   /**
-   * Local mode or specify modules as local modules
+   * Local mode or specify modules as local modules. Default is false.
    * @default false
    */
   modules: boolean | string[];
   /**
-   * Same as vite configuration base option
+   * Same as vite configuration base option. Default is "/".
    * @default "/"
    */
   base?: string;
   /**
-   * Local output directory, same as vite configuration build.outDir option
+   * Local output directory, same as vite configuration build.outDir option. Default is "dist".
    * @default 'dist'
    */
   outDir?: string;
   /**
-   * Local output path, the module URL will also be replaced with this path
+   * Local output path, the module URL will also be replaced with this path. Default is "npm/{name}@{version}".
    * @default "npm/{name}@{version}"
    */
   path?: string;
   /**
-   * Whether to copy to local
+   * Whether to copy to local. Default is true.
    * @default true
    */
   copy?: boolean;
@@ -110,12 +110,12 @@ export interface HtmlCdnOptions {
    */
   modules: HtmlCdnModule[];
   /**
-   * Tag selector where the cdn will be added
+   * Tag selector where the cdn will be added. Default is "title".
    * @default "title"
    */
   selector?: string;
   /**
-   * cdn source type, parameters name/version/file are taken from the modules configuration
+   * cdn source type, parameters name/version/file are taken from the modules configuration. Default is "unpkg".
    * * jsdelivr: url defaults to https://cdn.jsdelivr.net/npm/{name}@{version}/{file}
    * * unpkg: url defaults to https://unpkg.com/{name}@{version}/{file}
    * * custom: custom url can be defined
@@ -131,7 +131,7 @@ export interface HtmlCdnOptions {
    */
   url?: string;
   /**
-   * Local mode or specify modules as local modules
+   * Local mode or specify modules as local modules. Default is false.
    * @default false
    */
   local?: boolean | string[] | HtmlCdnLocal;

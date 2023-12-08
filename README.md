@@ -1,8 +1,8 @@
 # @tomjs/vite-plugin-html
 
-![npm](https://img.shields.io/npm/v/%40tomjs/vite-plugin-html) ![node-current (scoped)](https://img.shields.io/node/v/%40tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/%40tomjs%2Fvite-plugin-html)
+[![npm](https://img.shields.io/npm/v/@tomjs/vite-plugin-html)](https://www.npmjs.com/package/@tomjs/vite-plugin-html) ![node-current (scoped)](https://img.shields.io/node/v/@tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/@tomjs/vite-plugin-html) [![Docs](https://www.paka.dev/badges/v0/cute.svg)](https://www.paka.dev/npm/@tomjs/vite-plugin-html)
 
-A Vite plugin for handling HTML files, providing compression, loading, and CDN functionality.
+> A Vite plugin for handling HTML files, providing compression, loading, and CDN functionality.
 
 **English** | [中文](./README.zh_CN.md)
 
@@ -80,9 +80,12 @@ export default defineConfig({
 });
 ```
 
-#### Parameters
+#### Documentation
 
-You Visit The [API Document](https://paka.dev/npm/@tomjs/vite-plugin-html) Power by [paka.dev](https://paka.dev).
+- [paka.dev](https://paka.dev) 提供的 [API文档](https://paka.dev/npm/@tomjs/vite-plugin-html).
+- [unpkg.com](https://www.unpkg.com/) 提供的 [index.d.ts](https://www.unpkg.com/browse/@tomjs/vite-plugin-html/dist/index.d.ts).
+
+#### Parameters
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |

@@ -3,8 +3,6 @@
   "version": "1.2.2",
   "description": "A Vite plugin for handling HTML files, providing compression, loading, and CDN functionality.",
   "keywords": [
-    "tomjs",
-    "front-end",
     "vite",
     "plugin",
     "vite-plugin",
@@ -13,7 +11,8 @@
     "html",
     "minify",
     "loading",
-    "cdn"
+    "cdn",
+    "front-end"
   ],
   "author": {
     "name": "tom",

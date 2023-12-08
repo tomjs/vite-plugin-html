@@ -1,8 +1,8 @@
 # @tomjs/vite-plugin-html
 
-![npm](https://img.shields.io/npm/v/%40tomjs/vite-plugin-html) ![node-current (scoped)](https://img.shields.io/node/v/%40tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/%40tomjs%2Fvite-plugin-html)
+[![npm](https://img.shields.io/npm/v/@tomjs/vite-plugin-html)](https://www.npmjs.com/package/@tomjs/vite-plugin-html) ![node-current (scoped)](https://img.shields.io/node/v/@tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/@tomjs/vite-plugin-html) [![Docs](https://www.paka.dev/badges/v0/cute.svg)](https://www.paka.dev/npm/@tomjs/vite-plugin-html)
 
-vite 插件，用于处理 html 文件，提供压缩、loading、cdn功能
+> vite 插件，用于处理 html 文件，提供压缩、loading、cdn功能
 
 [English](./README.md) | **中文**
 
@@ -80,9 +80,12 @@ export default defineConfig({
 });
 ```
 
-#### 参数
+#### 文档
 
-你可以访问 [paka.dev](https://paka.dev) 提供的 [API文档](https://paka.dev/npm/@tomjs/vvite-plugin-html)
+- [paka.dev](https://paka.dev) 提供的 [API文档](https://paka.dev/npm/@tomjs/vite-plugin-html).
+- [unpkg.com](https://www.unpkg.com/) 提供的 [index.d.ts](https://www.unpkg.com/browse/@tomjs/vite-plugin-html/dist/index.d.ts).
+
+#### 参数
 
 | 参数名  | 类型                                                   | 默认值 | 说明             |
 | ------- | ------------------------------------------------------ | ------ | ---------------- |
