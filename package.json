@@ -1,15 +1,15 @@
 {
   "name": "@tomjs/vite-plugin-html",
   "version": "1.2.6",
-  "description": "A Vite plugin for handling HTML files, providing compression, loading, and CDN functionality.",
+  "description": "A Vite plugin for handling HTML files, providing compression, template, and CDN functionality.",
   "keywords": [
     "vite",
     "plugin",
     "vue",
     "react",
     "html",
-    "minify",
-    "loading",
+    "template",
+    "template",
     "cdn"
   ],
   "author": {
@@ -40,8 +40,12 @@
     }
   },
   "scripts": {
-    "dev": "tsup --watch",
-    "build": "tsup",
+    "dev": "run-p dev:template dev:lib",
+    "dev:lib": "tsup --watch",
+    "dev:template": "cross-env WATCH=1 tsx watch ./scripts/template.ts",
+    "build": "run-p build:template build:lib",
+    "build:lib": "tsup",
+    "build:template": "tsx ./scripts/template.ts",
     "lint": "run-s lint:eslint lint:stylelint lint:prettier",
     "lint:eslint": "eslint \"{src,examples}/**/*.{js,cjs,ts,tsx,vue}\" *.{js,cjs,ts} --fix --cache",
     "lint:stylelint": "stylelint \"examples/**/*.{vue,css,less,html}\" --fix --cache",
@@ -65,20 +69,23 @@
     "@tomjs/commitlint": "^2.0.5",
     "@tomjs/eslint": "^1.1.1",
     "@tomjs/prettier": "^1.0.6",
-    "@tomjs/stylelint": "^1.1.0",
-    "@tomjs/tsconfig": "^1.0.8",
+    "@tomjs/stylelint": "^1.1.1",
+    "@tomjs/tsconfig": "^1.1.2",
     "@types/fs-extra": "^11.0.4",
     "@types/html-minifier-terser": "^7.0.2",
     "@types/node": "^18.19.3",
-    "eslint": "^8.55.0",
+    "chokidar": "^3.5.3",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.56.0",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
-    "np": "^9.1.0",
+    "np": "^9.2.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.1.0",
+    "prettier": "^3.1.1",
     "stylelint": "^15.11.0",
     "tsup": "^8.0.1",
+    "tsx": "^4.6.2",
     "typescript": "~5.2.2",
-    "vite": "^5.0.6"
+    "vite": "^5.0.10"
   }
 }
