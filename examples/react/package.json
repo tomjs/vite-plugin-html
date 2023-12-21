@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "antd": "^5.12.2",
+    "antd": "^5.12.4",
     "dayjs": "^1.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -20,7 +20,7 @@
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
     "@vitejs/plugin-react-swc": "^3.5.0",
-    "typescript": "^5.3.2",
+    "typescript": "^5.3.3",
     "vite": "^5.0.10"
   }
 }
