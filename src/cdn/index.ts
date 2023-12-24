@@ -91,7 +91,16 @@ export function useHtmlCdnPlugin(options: HtmlCdnOptions): PluginOption {
         const destFolder = getModulePath(opts.local.path, name, version);
 
         files.forEach(s => {
-          fs.copySync(path.join(srcFolder, name, s), path.join(outPath, destFolder, s));
+          const src = path.join(srcFolder, name, s);
+          const dest = path.join(outPath, destFolder, s);
+          if (!fs.existsSync(src)) {
+            return;
+          }
+          if (fs.statSync(src).isDirectory()) {
+            fs.mkdirpSync(dest);
+          }
+
+          fs.copySync(src, dest);
         });
       });
     },

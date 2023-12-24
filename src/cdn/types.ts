@@ -23,6 +23,18 @@ export interface NpmModule {
    */
   deps?: DepModuleFiles[];
   /**
+   * These codes will be inserted before the script/link tag of the current module
+   *
+   * The `{url}` keyword in the code will be replaced with relevant information about the current module.
+   */
+  injectBefore?: string[];
+  /**
+   * These codes will be inserted after the script/link tag of the current module
+   *
+   * The `{url}` keyword in the code will be replaced with relevant information about the current module.
+   */
+  injectAfter?: string[];
+  /**
    * Local module
    */
   local?: boolean;
@@ -96,7 +108,7 @@ export interface HtmlCdnLocal {
    * Local mode or specify modules as local modules. Default is false.
    * @default false
    */
-  modules: boolean | string[];
+  modules: boolean | PresetNpmModule[];
   /**
    * Same as vite configuration base option. Default is "/".
    * @default "/"
@@ -152,5 +164,5 @@ export interface HtmlCdnOptions {
    * Local mode or specify modules as local modules. Default is false.
    * @default false
    */
-  local?: boolean | string[] | HtmlCdnLocal;
+  local?: boolean | PresetNpmModule[] | HtmlCdnLocal;
 }

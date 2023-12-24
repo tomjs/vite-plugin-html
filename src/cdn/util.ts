@@ -11,9 +11,6 @@ const urlTypeMap: Record<string, string> = {
   unpkg: 'https://unpkg.com/{name}@{version}',
 };
 
-// skip pkg file main check
-const skipPkgFileCheckModules: string[] = [];
-
 /**
  * Get package information
  */
@@ -27,14 +24,14 @@ function getPkgInfo(name: string) {
 
   const pkg = JSON.parse(fs.readFileSync(pkgFile, 'utf-8'));
   let file = pkg.jsdelivr || pkg.unpkg || pkg.main;
-  if (!file && !skipPkgFileCheckModules.includes(name)) {
+  if (!file) {
     console.log(
       `The ${name} package was not found with valid file information. Please configure it`,
     );
   }
 
   // Get compressed file to reduce size
-  if (!['.min.js', '.prod.js'].find(s => file.endsWith(s))) {
+  if (file && !['.min.js', '.prod.js'].find(s => file.endsWith(s))) {
     const minFileArr: string[] = file.split('.');
     if (minFileArr.length > 1) {
       const ext = minFileArr.pop() as string;
