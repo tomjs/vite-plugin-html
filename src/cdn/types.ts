@@ -19,14 +19,32 @@ export interface NpmModule {
    */
   file?: string | string[];
   /**
-   * Dependency modules
+   * Dependency modules or modules files. For example, [{"dayjs":["plugin/isoWeek.js"]}]
    */
-  deps?: string[];
+  deps?: DepModuleFiles[];
   /**
    * Local module
    */
   local?: boolean;
 }
+
+/**
+ * Dependency module name or files
+ *
+ * @example
+ * ```ts
+ * const deps: DepModuleFiles[] = [
+      'vue',
+      {
+        dayjs: [
+          'plugin/customParseFormat.js',
+        ],
+        'vue-demi': 'lib/index.iife.js'
+      },
+    ]
+ * ```
+ */
+export type DepModuleFiles = string | Record<string, string | string[]>;
 
 export type Union<T> = T | (string & {});
 

@@ -4,12 +4,15 @@ import path from 'node:path';
 import _ from 'lodash';
 import { isEmptyArray, pascalCase, urlConcat, uuid } from '../utils';
 import { PRESET_MODULES } from './data';
-import { HtmlCdnLocal, HtmlCdnOptions, HtmlInjectCode, NpmModule } from './types';
+import { DepModuleFiles, HtmlCdnLocal, HtmlCdnOptions, HtmlInjectCode, NpmModule } from './types';
 
 const urlTypeMap: Record<string, string> = {
   jsdelivr: 'https://cdn.jsdelivr.net/npm/{name}@{version}',
   unpkg: 'https://unpkg.com/{name}@{version}',
 };
+
+// skip pkg file main check
+const skipPkgFileCheckModules: string[] = [];
 
 /**
  * Get package information
@@ -24,8 +27,8 @@ function getPkgInfo(name: string) {
 
   const pkg = JSON.parse(fs.readFileSync(pkgFile, 'utf-8'));
   let file = pkg.jsdelivr || pkg.unpkg || pkg.main;
-  if (!file) {
-    throw new Error(
+  if (!file && !skipPkgFileCheckModules.includes(name)) {
+    console.log(
       `The ${name} package was not found with valid file information. Please configure it`,
     );
   }
@@ -194,7 +197,23 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
   }
 
   // Merge string modules
-  function mergeStringModuleConfig(npmName: string) {
+  function mergeStringModuleConfig(npmName: DepModuleFiles) {
+    if (typeof npmName === 'object') {
+      Object.keys(npmName).forEach(name => {
+        let npm = moduleList.find(m => m.name === name) as NpmModule;
+        if (!npm) {
+          npm = PRESET_MODULES[name] as NpmModule;
+        }
+        const newNpm = _.cloneDeep(npm);
+        newNpm.name = npm.name || name;
+        newNpm.file = [...new Set(getModuleFiles(npm.file).concat(getModuleFiles(npmName[name])))];
+        mergeModuleConfig(newNpm);
+      });
+      return;
+    } else if (typeof npmName !== 'string') {
+      return;
+    }
+
     if (moduleList.find(m => m.name === npmName)) {
       return;
     }
@@ -238,6 +257,7 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
       return;
     }
     const { name } = npm;
+
     const pkg = getPkgInfo(name);
     if (pkg) {
       const { version, file } = pkg;
@@ -247,36 +267,25 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
       // Check dependency version information
       const { deps } = npm;
       if (Array.isArray(deps)) {
-        deps.forEach(dep => {
+        const updateVersion = (dep: string) => {
           const depNpm = moduleList.find(m => m.name === dep);
           if (depNpm && !depNpm.version) {
             depNpm.version = pkg.dependencies[dep] || '';
+          }
+        };
+
+        deps.forEach(dep => {
+          if (typeof dep === 'object') {
+            Object.keys(dep).forEach(key => {
+              updateVersion(key);
+            });
+          } else if (typeof dep === 'string') {
+            updateVersion(dep);
           }
         });
       }
     } else {
       npm.local = false;
-    }
-
-    // Handle special references https://antdv.com/docs/vue/introduce#import-in-browser
-    if (name === 'ant-design-vue') {
-      const dayjs = moduleList.find(m => m.name === 'dayjs');
-      if (dayjs) {
-        const files = getModuleFiles(dayjs.file);
-        [
-          'customParseFormat.js',
-          'weekday.js',
-          'localeData.js',
-          'weekOfYear.js',
-          'weekYear.js',
-          'advancedFormat.js',
-          'quarterOfYear.js',
-        ].forEach(s => {
-          files.push(`plugin/${s}`);
-        });
-
-        dayjs.file = _.uniq(files);
-      }
     }
   });
 
