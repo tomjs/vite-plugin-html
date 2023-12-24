@@ -27,13 +27,13 @@ export interface NpmModule {
    *
    * The `{url}` keyword in the code will be replaced with relevant information about the current module.
    */
-  injectBefore?: string[];
+  injectBefore?: string | string[];
   /**
    * These codes will be inserted after the script/link tag of the current module
    *
    * The `{url}` keyword in the code will be replaced with relevant information about the current module.
    */
-  injectAfter?: string[];
+  injectAfter?: string | string[];
   /**
    * Local module
    */

@@ -282,6 +282,8 @@ Configuration for CDN modules.
 | file | `string \| string[]` | undefined | Path to the resource JS/CSS file |
 | deps | `string[]` | undefined | Dependent modules |
 | local | `boolean` | false | Whether it is a local module |
+| injectBefore | `string \| string[]` | undefined | These codes will be inserted before the script/link tag of the current module.The `{url}` keyword in the code will be replaced with relevant information about the current module. |
+| injectAfter | `string \| string[]` | undefined | These codes will be inserted after the script/link tag of the current module.The `{url}` keyword in the code will be replaced with relevant information about the current module. |
 
 Example:
 

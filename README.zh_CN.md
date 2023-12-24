@@ -274,14 +274,16 @@ pnpm add dayjs antd
 
 cdn 模块配置
 
-| 参数名   | 类型                 | 默认值    | 说明                                   |
-| -------- | -------------------- | --------- | -------------------------------------- |
-| **name** | `string`             | undefined | 包的名称                               |
-| var      | `string`             | undefined | 全局变量名，未指定则为包名的大驼峰形式 |
-| version  | `string`             | undefined | 包版本，未指定则取node_modules下的版本 |
-| file     | `string \| string[]` | undefined | 需要加载的资源js/css文件路径           |
-| deps     | `string[]`           | undefined | 依赖模块                               |
-| local    | `boolean`            | false     | 是否为本地模块                         |
+| 参数名 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| **name** | `string` | undefined | 包的名称 |
+| var | `string` | undefined | 全局变量名，未指定则为包名的大驼峰形式 |
+| version | `string` | undefined | 包版本，未指定则取node_modules下的版本 |
+| file | `string \| string[]` | undefined | 需要加载的资源js/css文件路径 |
+| deps | `string[]` | undefined | 依赖模块 |
+| local | `boolean` | false | 是否为本地模块 |
+| injectBefore | `string \| string[]` | undefined | 这些代码将被插入到当前模块的 script/link 标签之前。代码中的 `{url}` 关键字将被替换为当前模块的相关信息。 |
+| injectAfter | `string \| string[]` | undefined | 这些代码将被插入到当前模块的 script/link 标签之后。代码中的 `{url}` 关键字将被替换为当前模块的相关信息。 |
 
 示例如下:
 

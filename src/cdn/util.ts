@@ -174,11 +174,13 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
     npm.var = npm.var || pascalCase(npm.name);
 
     const { deps } = npm as NpmModule;
+
     if (Array.isArray(deps) && deps.length > 0) {
       deps.forEach(dep => {
         mergeStringModuleConfig(dep);
       });
     }
+
     // Local CDN
     if (typeof npm.local !== 'boolean') {
       const localModules = opts.local.modules;
@@ -290,12 +292,23 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
   const pkgDeps = getProjectPkgDeps();
 
   const baseUrl = opts.local?.base || userConfig?.base || '/';
+
+  function injectModuleCode(inject?: string | string[]) {
+    if (Array.isArray(inject)) {
+      codes.push(...inject);
+    } else if (typeof inject === 'string') {
+      codes.push(inject);
+    }
+  }
+
   moduleList.forEach(npm => {
     if ('code' in npm) {
       codes.push(npm.code || '');
       return;
     }
     const { name } = npm;
+
+    injectModuleCode(npm.injectBefore);
 
     // Exclude npm dependencies
     if (pkgDeps.includes(name)) {
@@ -314,6 +327,8 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
         codes.push(`<link href="${fileUrl}" type="text/css" rel="stylesheet"></link>`);
       }
     });
+
+    injectModuleCode(npm.injectAfter);
   });
 
   return {
