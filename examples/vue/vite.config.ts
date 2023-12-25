@@ -15,7 +15,7 @@ export default defineConfig({
       cdn: {
         modules: ['vue', 'ant-design-vue', 'pinia', 'vue-router'],
         local: {
-          modules: ['vue'],
+          modules: true,
           copy: true,
         },
       },

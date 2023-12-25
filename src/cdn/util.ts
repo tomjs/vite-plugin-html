@@ -73,14 +73,28 @@ function getProjectPkgDeps() {
   return Object.keys(pkg.dependencies || {});
 }
 
-type PreHandleOptions = Omit<HtmlCdnOptions, 'local'> & { local: HtmlCdnLocal };
+interface PreHandleOptions extends Omit<HtmlCdnOptions, 'local'> {
+  local: HtmlCdnLocal;
+}
 
 // Preprocess configuration options
 function preHandleOptions(options?: HtmlCdnOptions): PreHandleOptions {
-  const opts: PreHandleOptions = Object.assign(
-    { type: 'unpkg', local: false } as HtmlCdnOptions,
-    _.cloneDeep(Object.assign({}, options)),
-  );
+  const { local, ...restOpts } = _.cloneDeep(options) || {};
+  const opts = restOpts as PreHandleOptions;
+
+  // const { local } = opts;
+  const localOpts: HtmlCdnLocal = {
+    modules: [],
+    copy: true,
+  };
+  if (typeof local === 'boolean' || Array.isArray(local)) {
+    Object.assign(localOpts, { modules: local });
+  } else {
+    Object.assign(localOpts, local);
+  }
+  localOpts.modules = localOpts.modules ?? false;
+  localOpts.path = localOpts.path || 'npm/{name}@{version}';
+  opts.local = localOpts;
 
   // URL type
   let { type, url } = opts;
@@ -96,21 +110,6 @@ function preHandleOptions(options?: HtmlCdnOptions): PreHandleOptions {
 
   opts.type = type;
   opts.url = url;
-
-  const { local } = opts;
-  const localOpts: HtmlCdnLocal = {
-    modules: [],
-    copy: true,
-  };
-
-  if (typeof local === 'boolean' || Array.isArray(local)) {
-    Object.assign(localOpts, { modules: local });
-  } else {
-    Object.assign(localOpts, local);
-  }
-  localOpts.modules = localOpts.modules ?? false;
-  localOpts.path = localOpts.path || 'npm/{name}@{version}';
-  opts.local = localOpts;
 
   return opts;
 }
@@ -183,7 +182,7 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
 
     // Local CDN
     if (typeof npm.local !== 'boolean') {
-      const localModules = opts.local.modules;
+      const localModules = opts.local?.modules;
       if (typeof localModules === 'boolean') {
         npm.local = localModules;
       } else if (Array.isArray(localModules) && localModules.length > 0) {
@@ -220,7 +219,7 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
     const npm = PRESET_MODULES[npmName];
     if (npm) {
       npm.name = npm.name || npmName;
-      mergeModuleConfig(_.cloneDeep(npm));
+      mergeModuleConfig(_.cloneDeep(npm) as NpmModule);
     } else {
       mergeModuleConfig({
         name: npmName,
