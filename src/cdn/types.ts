@@ -25,13 +25,13 @@ export interface NpmModule {
   /**
    * These codes will be inserted before the script/link tag of the current module
    *
-   * The `{url}` keyword in the code will be replaced with relevant information about the current module.
+   * The `{{url}}` keyword in the code will be replaced with relevant information about the current module.
    */
   injectBefore?: string | string[];
   /**
    * These codes will be inserted after the script/link tag of the current module
    *
-   * The `{url}` keyword in the code will be replaced with relevant information about the current module.
+   * The `{{url}}` keyword in the code will be replaced with relevant information about the current module.
    */
   injectAfter?: string | string[];
   /**
@@ -91,7 +91,7 @@ export interface HtmlInjectCode {
   /**
    * Injected HTML code
    */
-  code: string;
+  code: string | string[];
   [key: string]: any;
 }
 

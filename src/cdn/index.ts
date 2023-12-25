@@ -4,7 +4,7 @@ import fs from 'fs-extra';
 import { parse as htmlParser } from 'node-html-parser';
 import externalGlobals from 'rollup-plugin-external-globals';
 import { type HtmlCdnOptions } from './types';
-import { getModuleConfig, getModuleFiles, getModulePath } from './util';
+import { getArrayValue, getModuleConfig, getModulePath } from './util';
 
 export * from './types';
 
@@ -84,7 +84,7 @@ export function useHtmlCdnPlugin(options: HtmlCdnOptions): PluginOption {
 
       localModules.forEach(m => {
         const { name, version, file } = m;
-        const files = getModuleFiles(file);
+        const files = getArrayValue(file);
         if (files.length === 0) {
           return;
         }

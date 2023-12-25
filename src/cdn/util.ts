@@ -116,10 +116,10 @@ function preHandleOptions(options?: HtmlCdnOptions): PreHandleOptions {
 }
 
 /**
- * Get module file array
+ * Get `string | string` to string[]
  */
-export function getModuleFiles(file) {
-  const files = file || [];
+export function getArrayValue(value) {
+  const files = value || [];
   return Array.isArray(files) ? files : [files];
 }
 
@@ -205,7 +205,7 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
         }
         const newNpm = _.cloneDeep(npm);
         newNpm.name = npm.name || name;
-        newNpm.file = [...new Set(getModuleFiles(npm.file).concat(getModuleFiles(npmName[name])))];
+        newNpm.file = [...new Set(getArrayValue(npm.file).concat(getArrayValue(npmName[name])))];
         mergeModuleConfig(newNpm);
       });
       return;
@@ -293,22 +293,23 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
 
   const baseUrl = opts.local?.base || userConfig?.base || '/';
 
-  function injectModuleCode(inject?: string | string[]) {
-    if (Array.isArray(inject)) {
-      codes.push(...inject);
-    } else if (typeof inject === 'string') {
-      codes.push(inject);
+  function injectModuleCode(url: string, inject?: string | string[]) {
+    if (!inject) {
+      return;
+    }
+
+    const codeArr: string[] = getArrayValue(inject);
+    if (codeArr.length > 0) {
+      codes.push(...codeArr.map(s => (s || '').trim().replace(new RegExp('{{url}}', 'g'), url)));
     }
   }
 
   moduleList.forEach(npm => {
     if ('code' in npm) {
-      codes.push(npm.code || '');
+      codes.push(...getArrayValue(npm.code));
       return;
     }
     const { name } = npm;
-
-    injectModuleCode(npm.injectBefore);
 
     // Exclude npm dependencies
     if (pkgDeps.includes(name)) {
@@ -317,10 +318,14 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
     }
 
     const urlPath = getModulePath(npm.local ? opts?.local?.path : opts.url, name, npm.version);
+    const replaceUrl = urlConcat(npm.local ? baseUrl : '', urlPath);
+
+    injectModuleCode(replaceUrl, npm.injectBefore);
+
     // Import scripts and styles
-    const files = getModuleFiles(npm.file);
+    const files = getArrayValue(npm.file);
     files.forEach(s => {
-      const fileUrl = urlConcat(npm.local ? baseUrl : '', urlPath, (s || '').replace(/\.\//g, ''));
+      const fileUrl = urlConcat(replaceUrl, (s || '').replace(/\.\//g, ''));
       if (s.endsWith('.js')) {
         codes.push(`<script src="${fileUrl}"></script>`);
       } else if (s.endsWith('.css')) {
@@ -328,7 +333,7 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
       }
     });
 
-    injectModuleCode(npm.injectAfter);
+    injectModuleCode(replaceUrl, npm.injectAfter);
   });
 
   return {
