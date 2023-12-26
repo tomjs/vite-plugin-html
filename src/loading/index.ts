@@ -1,5 +1,6 @@
 import type { PluginOption } from 'vite';
 import { parse as htmlParser } from 'node-html-parser';
+import { LOADING_PLUGIN_NAME } from '../constants';
 import loadingHtml from './template';
 import { type HtmlLoadingOptions } from './types';
 
@@ -15,7 +16,7 @@ const DEFAULT_SELECTOR = '#app';
  */
 export function useHtmlLoadingPlugin(options?: boolean | HtmlLoadingOptions): PluginOption {
   return {
-    name: '@tomjs:html-loading',
+    name: LOADING_PLUGIN_NAME,
     enforce: 'post',
     transformIndexHtml(html) {
       let opts: HtmlLoadingOptions = {};

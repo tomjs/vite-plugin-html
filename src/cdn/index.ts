@@ -3,6 +3,7 @@ import path from 'node:path';
 import fs from 'fs-extra';
 import { parse as htmlParser } from 'node-html-parser';
 import externalGlobals from 'rollup-plugin-external-globals';
+import { CDN_PLUGIN_NAME } from '../constants';
 import { type HtmlCdnOptions } from './types';
 import { getArrayValue, getModuleConfig, getModulePath } from './util';
 
@@ -17,7 +18,7 @@ export function useHtmlCdnPlugin(options: HtmlCdnOptions): PluginOption {
   let outDir;
 
   return {
-    name: '@tomjs:html-cdn',
+    name: CDN_PLUGIN_NAME,
     apply: 'build',
     enforce: 'post',
     config(userCfg, { command }) {

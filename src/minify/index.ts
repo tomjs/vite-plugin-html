@@ -3,6 +3,7 @@
 import type { PluginOption } from 'vite';
 import { minify as minifyFn } from 'html-minifier-terser';
 import { createFilter } from '@rollup/pluginutils';
+import { MINIFY_PLUGIN_NAME } from '../constants';
 import { type HtmlMinifyOptions } from './types';
 
 export * from './types';
@@ -39,7 +40,7 @@ async function minifyHtml(html: string, minify: boolean | HtmlMinifyOptions) {
  */
 export function useHtmlMinifyPlugin(minify?: boolean | HtmlMinifyOptions): PluginOption {
   return {
-    name: '@tomjs:html-minify',
+    name: MINIFY_PLUGIN_NAME,
     apply: 'build',
     enforce: 'post',
     async generateBundle(_, outBundle) {
