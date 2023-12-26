@@ -10,10 +10,9 @@
   },
   "dependencies": {
     "ant-design-vue": "^4.0.8",
-    "dayjs": "^1.11.10",
     "pinia": "^2.1.7",
     "vue": "^3.3.13",
-    "vue-demi": "^0.14.6"
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@tomjs/vite-plugin-html": "workspace:^",

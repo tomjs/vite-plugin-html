@@ -231,34 +231,6 @@ export default defineConfig({
 });
 ```
 
-#### 依赖
-
-如果使用非 `yarn` 作为包管理工具，部分 npm 包需要额外引入特殊依赖包，为保障正常使用，需要添加依赖
-
-- pinia
-
-```bash
-pnpm add vue-demi pinia
-```
-
-- ant-design-vue
-
-```bash
-pnpm add dayjs ant-design-vue
-```
-
-- @vueuse/core
-
-```bash
-pnpm add @vueuse/core @vueuse/shared
-```
-
-- antd
-
-```bash
-pnpm add dayjs antd
-```
-
 #### 参数
 
 ##### HtmlCdnOptions
@@ -280,6 +252,7 @@ cdn 模块配置
 | var | `string` | undefined | 全局变量名，未指定则为包名的大驼峰形式 |
 | version | `string` | undefined | 包版本，未指定则取node_modules下的版本 |
 | file | `string \| string[]` | undefined | 需要加载的资源js/css文件路径 |
+| modulePath | `string` | undefined | 设置 npm 模块路径 |
 | deps | `string[]` | undefined | 依赖模块 |
 | local | `boolean` | false | 是否为本地模块 |
 | injectBefore | `string \| string[]` | undefined | 这些代码将被插入到当前模块的 script/link 标签之前。代码中的 `{url}` 关键字将被替换为当前模块的相关信息。 |

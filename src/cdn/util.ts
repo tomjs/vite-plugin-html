@@ -2,7 +2,7 @@ import type { UserConfig } from 'vite';
 import fs from 'node:fs';
 import path from 'node:path';
 import _ from 'lodash';
-import { isEmptyArray, pascalCase, urlConcat, uuid } from '../utils';
+import { getNpmDeps, getPkgPath, isEmptyArray, pascalCase, urlConcat, uuid } from '../utils';
 import { PRESET_MODULES } from './data';
 import { DepModuleFiles, HtmlCdnLocal, HtmlCdnOptions, HtmlInjectCode, NpmModule } from './types';
 
@@ -14,9 +14,12 @@ const urlTypeMap: Record<string, string> = {
 /**
  * Get package information
  */
-function getPkgInfo(name: string) {
-  const pwd = process.cwd();
-  const modulePath = path.join(pwd, 'node_modules', name);
+function getPkgInfo(name: string, filePath?: string, pnpmFilePath?: string) {
+  const modulePath = filePath || getPkgPath(name) || pnpmFilePath;
+  if (!modulePath) {
+    return;
+  }
+
   const pkgFile = path.join(modulePath, 'package.json');
   if (!fs.existsSync(pkgFile)) {
     return;
@@ -56,6 +59,7 @@ function getPkgInfo(name: string) {
     version: pkg.version,
     file,
     dependencies,
+    modulePath,
   };
 }
 
@@ -249,18 +253,20 @@ export function getModuleConfig(options: HtmlCdnOptions, userConfig: UserConfig)
     mergeModuleConfig(npm as NpmModule);
   });
 
+  const npmDeps = getNpmDeps();
+
   // Process npm versions and reference file information
   moduleList.forEach(npm => {
     if ('code' in npm) {
       return;
     }
     const { name } = npm;
-
-    const pkg = getPkgInfo(name);
+    const pkg = getPkgInfo(name, npm.modulePath, npmDeps[name]?.path);
     if (pkg) {
       const { version, file } = pkg;
       npm.version = npm.version || version;
       npm.file = npm.file || file;
+      npm.modulePath = pkg.modulePath;
 
       // Check dependency version information
       const { deps } = npm;

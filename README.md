@@ -231,34 +231,6 @@ export default defineConfig({
 });
 ```
 
-#### Dependencies
-
-If you are using a package manager other than `yarn` , you may need to install additional dependencies for certain npm packages. To ensure proper functionality, please add the following dependencies:
-
-- pinia
-
-```bash
-pnpm add vue-demi pinia
-```
-
-- ant-design-vue
-
-```bash
-pnpm add dayjs ant-design-vue
-```
-
-- @vueuse/core
-
-```bash
-pnpm add @vueuse/core @vueuse/shared
-```
-
-- antd
-
-```bash
-pnpm add dayjs antd
-```
-
 #### Parameters
 
 ##### HtmlCdnOptions
@@ -280,6 +252,7 @@ Configuration for CDN modules.
 | var | `string` | undefined | Global variable name (defaults to PascalCase name) |
 | version | `string` | undefined | Package version (defaults to version in node_modules) |
 | file | `string \| string[]` | undefined | Path to the resource JS/CSS file |
+| modulePath | `string` | undefined | Set npm module path |
 | deps | `string[]` | undefined | Dependent modules |
 | local | `boolean` | false | Whether it is a local module |
 | injectBefore | `string \| string[]` | undefined | These codes will be inserted before the script/link tag of the current module.The `{url}` keyword in the code will be replaced with relevant information about the current module. |

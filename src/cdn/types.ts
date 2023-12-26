@@ -19,6 +19,10 @@ export interface NpmModule {
    */
   file?: string | string[];
   /**
+   * Set npm module path
+   */
+  modulePath?: string;
+  /**
    * Dependency modules or modules files. For example, [{"dayjs":["plugin/isoWeek.js"]}]
    */
   deps?: DepModuleFiles[];

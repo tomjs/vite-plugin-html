@@ -92,7 +92,7 @@ export function useHtmlCdnPlugin(options: HtmlCdnOptions): PluginOption {
         const destFolder = getModulePath(opts.local.path, name, version);
 
         files.forEach(s => {
-          const src = path.join(srcFolder, name, s);
+          const src = m.modulePath ? path.join(m.modulePath, s) : path.join(srcFolder, name, s);
           const dest = path.join(outPath, destFolder, s);
           if (!fs.existsSync(src)) {
             return;
