@@ -306,6 +306,26 @@ const modules = [
 - ahooks
 - @ant-design/charts
 
+**提醒**
+
+有的模块使用 `CDN` 方式引入，必须先引入其他依赖。使用 `pnpm` 等包管理工具，如果未明确安装模块的依赖，可能无法在 `node_modules` 中获取模块的依赖信息，可能会出现如下异常情况：
+
+- `CDN` 的网址无版本号
+- `local` 模式下，依赖扔使用 `CDN` 网址的形式
+
+可以尝试主动安装相关依赖解决，以下为部分模块依赖情况：
+
+- antd
+  - dayjs
+- ant-design-vue
+  - dayjs
+- pinia
+  - vue-demi
+- @vueuse/core
+  - @vueuse/shared
+
+目前本库使用 `pnpm list` 读取依赖来解决这个问题，如果有遇到其他 `npm` 工具出现这个问题，请联系作者添加相关支持，感谢。
+
 ##### HtmlInjectCode
 
 注入的 html 页面代码等

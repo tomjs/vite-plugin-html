@@ -306,6 +306,26 @@ Default supported types, internally mapped to corresponding [NpmModule](#NpmModu
 - ahooks
 - @ant-design/charts
 
+**WARNING**
+
+Some modules are introduced using `CDN`, and other dependencies must be introduced first. When using package management tools such as `pnpm`, if the module's dependencies are not explicitly installed, the module's dependency information may not be obtained in `node_modules`, and the following exceptions may occur:
+
+- The URL of `CDN` has no version number
+- In `local` mode, dependencies are thrown in the form of `CDN` URL
+
+You can try to proactively install related dependencies to solve them. The following are some module dependencies:
+
+- antd
+  - dayjs
+- ant-design-vue
+  - dayjs
+- pinia
+  - vue-demi
+- @vueuse/core
+  - @vueuse/shared
+
+Currently, this library uses `pnpm list` to read dependencies to solve this problem. If you encounter this problem with other `npm` tools, please contact the author to add relevant support. Thanks.
+
 ##### HtmlInjectCode
 
 Injected HTML page code.
