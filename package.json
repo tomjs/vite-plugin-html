@@ -51,7 +51,7 @@
     "lint:stylelint": "stylelint \"examples/**/*.{vue,css,less,html}\" --fix --cache",
     "lint:prettier": "prettier --write \"{src,examples}/**/*.{js,cjs,ts,tsx,json,md,html}\" *.{js,cjs,ts,json,md}",
     "prepare": "husky install",
-    "pnp": "npm run build && np --any-branch --no-yarn --yolo --no-publish --message \"chore: release v%s\""
+    "np": "npm run build && np --any-branch --no-yarn --yolo --no-publish --message \"chore: release v%s\""
   },
   "engines": {
     "node": ">=16"
