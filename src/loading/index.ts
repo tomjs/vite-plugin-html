@@ -1,7 +1,7 @@
 import type { PluginOption } from 'vite';
 import { parse as htmlParser } from 'node-html-parser';
 import { LOADING_PLUGIN_NAME } from '../constants';
-import loadingHtml from './template';
+import loadingHtml from './template.html';
 import { type HtmlLoadingOptions } from './types';
 
 export * from './types';

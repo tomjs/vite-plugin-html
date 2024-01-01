@@ -5,6 +5,9 @@ export default defineConfig({
   format: ['esm', 'cjs'],
   target: ['es2021', 'node16'],
   external: ['vite'],
+  loader: {
+    '.html': 'text',
+  },
   clean: true,
   dts: true,
   splitting: true,

@@ -40,12 +40,8 @@
     }
   },
   "scripts": {
-    "dev": "run-p dev:template dev:lib",
-    "dev:lib": "tsup --watch",
-    "dev:template": "cross-env WATCH=1 tsx watch ./scripts/template.ts",
-    "build": "run-p build:template build:lib",
-    "build:lib": "tsup",
-    "build:template": "tsx ./scripts/template.ts",
+    "dev": "tsup --watch",
+    "build": "tsup",
     "lint": "run-s lint:eslint lint:stylelint lint:prettier",
     "lint:eslint": "eslint \"{src,examples}/**/*.{js,cjs,ts,tsx,vue}\" *.{js,cjs,ts} --fix --cache",
     "lint:stylelint": "stylelint \"examples/**/*.{vue,css,less,html}\" --fix --cache",
