@@ -238,9 +238,16 @@ export default defineConfig({
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
 | **modules** | ([NpmModule](#NpmModule) \| [PresetNpmModule](#PresetNpmModule) \| [HtmlInjectCode](#HtmlInjectCode))[] | [] | Modules to import |
-| type | `'unpkg' \| 'jsdelivr' \| 'custom'` | 'unpkg' | CDN source type |
+| type | `'npmmirror' \| 'unpkg' \| 'jsdelivr' \| 'custom'` | 'jsdelivr' | `CDN` source type, parameters `name`/`version`/`file` are taken from the modules configuration. When the OS language is `zh_CN` , the default value is `npmmirror`, otherwise it is `jsdelivr`. |
 | url | `string` | '' | Custom URL (used with `type` ) |
 | local | 'boolean' \| 'string[]' \| [HtmlCdnLocal](#HtmlCdnLocal) | false | Local mode or specific modules |
+
+CDN type:
+
+- npmmirror: url defaults to https://registry.npmmirror.com/{name}/{version}/files/{file}
+- jsdelivr: url defaults to https://cdn.jsdelivr.net/npm/{name}@{version}/{file}
+- unpkg: url defaults to https://unpkg.com/{name}@{version}/{file}
+- custom: custom url can be defined
 
 ##### NpmModule
 

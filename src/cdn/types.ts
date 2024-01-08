@@ -149,16 +149,22 @@ export interface HtmlCdnOptions {
    */
   selector?: string;
   /**
-   * cdn source type, parameters name/version/file are taken from the modules configuration. Default is "unpkg".
+   * `CDN` source type, parameters `name`/`version`/`file` are taken from the modules configuration.
+   *
+   * When the OS language is `zh_CN` , the default value is `npmmirror`, otherwise it is `jsdelivr`.
+   *
+   * * npmmirror: url defaults to https://registry.npmmirror.com/{name}/{version}/files/{file}
    * * jsdelivr: url defaults to https://cdn.jsdelivr.net/npm/{name}@{version}/{file}
    * * unpkg: url defaults to https://unpkg.com/{name}@{version}/{file}
    * * custom: custom url can be defined
    *
-   * @default "unpkg"
+   * @default "npmmirror"
    */
-  type?: 'unpkg' | 'jsdelivr' | 'custom';
+  type?: 'npmmirror' | 'unpkg' | 'jsdelivr' | 'custom';
   /**
    * Used in conjunction with the type parameter, sets different urls, the final path will be {url}/{file}
+   *
+   * * npmmirror: url defaults to https://registry.npmmirror.com/{name}/{version}/files
    * * jsdelivr: url defaults to https://cdn.jsdelivr.net/npm/{name}@{version}
    * * unpkg: url defaults to https://unpkg.com/{name}@{version}
    * * custom: custom url can be defined

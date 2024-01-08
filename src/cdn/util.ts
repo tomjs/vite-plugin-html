@@ -7,6 +7,7 @@ import { PRESET_MODULES } from './data';
 import { DepModuleFiles, HtmlCdnLocal, HtmlCdnOptions, HtmlInjectCode, NpmModule } from './types';
 
 const urlTypeMap: Record<string, string> = {
+  npmmirror: 'https://registry.npmmirror.com/{name}/{version}/files',
   jsdelivr: 'https://cdn.jsdelivr.net/npm/{name}@{version}',
   unpkg: 'https://unpkg.com/{name}@{version}',
 };
@@ -102,11 +103,11 @@ function preHandleOptions(options?: HtmlCdnOptions): PreHandleOptions {
 
   // URL type
   let { type, url } = opts;
-  if (!type || !['jsdelivr', 'unpkg', 'custom', 'local'].includes(type)) {
-    type = 'unpkg';
+  if (!type || !['npmmirror', 'jsdelivr', 'unpkg', 'custom'].includes(type)) {
+    type = new Intl.NumberFormat().resolvedOptions().locale === 'zh-CN' ? 'npmmirror' : 'jsdelivr';
   }
 
-  if (['jsdelivr', 'unpkg'].includes(type)) {
+  if (['npmmirror', 'jsdelivr', 'unpkg'].includes(type)) {
     url = urlTypeMap[type];
   } else if (!url) {
     throw new Error('When the type parameter is custom, the url parameter is required.');

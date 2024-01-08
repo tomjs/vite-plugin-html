@@ -238,9 +238,16 @@ export default defineConfig({
 | 参数名 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | **modules** | ([NpmModule](#NpmModule) \| [PresetNpmModule](#PresetNpmModule) \| [HtmlInjectCode](#HtmlInjectCode))[] | [] | 引入的模块 |
-| type | `'unpkg' \| 'jsdelivr' \| 'custom'` | 'unpkg' | cdn 源类型。jsdelivr: url默认值为 https://cdn.jsdelivr.net/npm/{name}@{version}/{file}; unpkg: url默认值为 https://unpkg.com/{name}@{version}/{file}; custom: 可自定义url |
+| type | `'npmmirror' \| 'unpkg' \| 'jsdelivr' \| 'custom'` | `CDN` 源类型，参数 `name`/`version`/`file` 取自模块配置。 当操作系统语言为 `zh_CN` 时，默认值为 `npmmirror` ，否则为 `jsdelivr`。 |
 | url | `string` | '' | 结合 type 参数使用, 设置不同url，最终路径为 {url}/{file} |
 | local | 'boolean' \| 'string[]' \| [HtmlCdnLocal](#HtmlCdnLocal) | false | 本地模式或指定模块为本地模块，默认为 false |
+
+CDN type:
+
+- npmmirror: url 默认为 https://registry.npmmirror.com/{name}/{version}/files/{file}
+- jsdelivr: url 默认为 https://cdn.jsdelivr.net/npm/{name}@{version}/{file}
+- unpkg: url 默认为 https://unpkg.com/{name}@{version}/{file}
+- custom: 可以自定义 url
 
 ##### NpmModule
 
