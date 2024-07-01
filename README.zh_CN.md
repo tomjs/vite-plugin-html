@@ -1,6 +1,6 @@
 # @tomjs/vite-plugin-html
 
-[![npm](https://img.shields.io/npm/v/@tomjs/vite-plugin-html)](https://www.npmjs.com/package/@tomjs/vite-plugin-html) ![node-current (scoped)](https://img.shields.io/node/v/@tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/@tomjs/vite-plugin-html) [![Docs](https://www.paka.dev/badges/v0/cute.svg)](https://www.paka.dev/npm/@tomjs/vite-plugin-html)
+[![npm](https://img.shields.io/npm/v/@tomjs/vite-plugin-html)](https://www.npmjs.com/package/@tomjs/vite-plugin-html) ![node-current (scoped)](https://img.shields.io/node/v/@tomjs/vite-plugin-html) ![NPM](https://img.shields.io/npm/l/@tomjs/vite-plugin-html) [![Docs](https://img.shields.io/badge/API-unpkg-orange)](https://www.unpkg.com/browse/@tomjs/vite-plugin-html/dist/index.d.ts)
 
 [English](./README.md) | **中文**
 
@@ -23,7 +23,7 @@ yarn add @tomjs/vite-plugin-html -D
 使用 `npm`
 
 ```bash
-npm i @tomjs/vite-plugin-html --save-dev
+npm add @tomjs/vite-plugin-html -D
 ```
 
 ## 使用说明
@@ -82,7 +82,6 @@ export default defineConfig({
 
 #### 文档
 
-- [paka.dev](https://paka.dev) 提供的 [API文档](https://paka.dev/npm/@tomjs/vite-plugin-html).
 - [unpkg.com](https://www.unpkg.com/) 提供的 [index.d.ts](https://www.unpkg.com/browse/@tomjs/vite-plugin-html/dist/index.d.ts).
 
 #### 参数
